@@ -5,7 +5,7 @@
     <entity repository-class="AppBundle\Repository\ProjectRepository"
             name="AppBundle\Entity\Project"
             table="projects">
-        <id name="id" type="bigint" column-definition="bigint(20) unsigned NOT NULL" column="id">
+        <id name="id" type="bigint" column="id">
             <generator strategy="AUTO"/>
         </id>
 

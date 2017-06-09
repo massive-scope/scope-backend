@@ -5,7 +5,7 @@
     <entity repository-class="AppBundle\Repository\ActivityEffortRepository"
             name="AppBundle\Entity\ActivityEffort"
             table="activityEfforts">
-        <id name="id" type="integer" column="id">
+        <id name="id" type="bigint" column="id">
             <generator strategy="AUTO"/>
         </id>
 
