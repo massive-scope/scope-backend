@@ -15,3 +15,26 @@
 !var/SymfonyRequirements.php
 /vendor/
 /web/bundles/
+
+# Frontend caches
+.sass-cache/
+node_modules/
+bower_components/
+.grunt/
+temp.js
+
+# node
+node_modules
+npm-debug.log
+.sass-cache
+
+# IDEs
+/.idea
+*.iml
+*~
+
+# php-cs-fixer
+.php_cs.cache
+
+# System files
+.DS_Store
