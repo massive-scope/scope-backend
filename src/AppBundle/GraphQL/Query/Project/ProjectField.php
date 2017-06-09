@@ -7,17 +7,32 @@ use AppBundle\GraphQL\Type\ProjectType;
 use Doctrine\ORM\EntityManagerInterface;
 use Youshido\GraphQL\Config\Field\FieldConfig;
 use Youshido\GraphQL\Execution\ResolveInfo;
-use Youshido\GraphQL\Type\ListType\ListType;
 use Youshido\GraphQL\Type\NonNullType;
 use Youshido\GraphQL\Type\Scalar\IntType;
-use Youshido\GraphQL\Type\Scalar\StringType;
 use Youshido\GraphQLBundle\Field\AbstractContainerAwareField;
 
 class ProjectField extends AbstractContainerAwareField
 {
+    /**
+     * @var bool
+     */
+    private $hasId;
+
+    /**
+     * @param bool $hasId
+     */
+    public function __construct($hasId = true)
+    {
+        $this->hasId = $hasId;
+
+        parent::__construct();
+    }
+
     public function build(FieldConfig $config)
     {
-        $this->addArgument('id', new NonNullType(new IntType()));
+        if ($this->hasId) {
+            $this->addArgument('id', new NonNullType(new IntType()));
+        }
     }
 
     public function resolve($value, array $args, ResolveInfo $info)
@@ -31,7 +46,7 @@ class ProjectField extends AbstractContainerAwareField
 
         return $queryBuilder
             ->where('entity.id = :id')
-            ->setParameter('id', $args['id'])
+            ->setParameter('id', array_key_exists('id', $args) ? $args['id'] : $value['projectID'])
             ->getQuery()
             ->getSingleResult();
     }

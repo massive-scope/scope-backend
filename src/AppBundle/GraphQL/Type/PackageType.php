@@ -2,6 +2,7 @@
 
 namespace AppBundle\GraphQL\Type;
 
+use AppBundle\GraphQL\Query\Project\ProjectField;
 use Youshido\GraphQL\Type\NonNullType;
 use Youshido\GraphQL\Type\Object\AbstractObjectType;
 use Youshido\GraphQL\Type\Scalar\IdType;
@@ -16,6 +17,7 @@ class PackageType extends AbstractObjectType
                 'id' => new NonNullType(new IdType()),
                 'title' => new StringType(),
                 'description' => new StringType(),
+                'project' => new ProjectField(false),
             ]
         );
     }
