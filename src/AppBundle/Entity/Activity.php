@@ -30,12 +30,12 @@ class Activity
     /**
      * @var boolean
      */
-    private $charged;
+    private $charged = false;
 
     /**
      * @var integer
      */
-    private $sortOrder;
+    private $sortOrder = 0;
 
     /**
      * @var \DateTime
@@ -45,22 +45,22 @@ class Activity
     /**
      * @var boolean
      */
-    private $hasReminder;
+    private $hasReminder = false;
 
     /**
      * @var boolean
      */
-    private $isInternal;
+    private $isInternal = false;
 
     /**
      * @var integer
      */
-    private $productionLevel;
+    private $productionLevel = 0;
 
     /**
      * @var float
      */
-    private $projectedEffort;
+    private $projectedEffort = 0;
 
     /**
      * @var float
@@ -118,6 +118,7 @@ class Activity
     public function __construct()
     {
         $this->efforts = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->lastUpdate = new \DateTime();
     }
 
     /**
