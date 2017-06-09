@@ -139,12 +139,12 @@ class ActivityEffort
         return $this->isTracking;
     }
     /**
-     * @var \AppBundle\Entity\Activity
+     * @var Activity
      */
     private $activity;
 
     /**
-     * @var \AppBundle\Entity\ChargingType
+     * @var ChargingType
      */
     private $chargingType;
 
@@ -152,11 +152,11 @@ class ActivityEffort
     /**
      * Set activity
      *
-     * @param \AppBundle\Entity\Activity $activity
+     * @param Activity $activity
      *
      * @return ActivityEffort
      */
-    public function setActivity(\AppBundle\Entity\Activity $activity)
+    public function setActivity(Activity $activity)
     {
         $this->activity = $activity;
 
@@ -166,7 +166,7 @@ class ActivityEffort
     /**
      * Get activity
      *
-     * @return \AppBundle\Entity\Activity
+     * @return Activity
      */
     public function getActivity()
     {
@@ -176,11 +176,11 @@ class ActivityEffort
     /**
      * Set chargingType
      *
-     * @param \AppBundle\Entity\ChargingType $chargingType
+     * @param ChargingType $chargingType
      *
      * @return ActivityEffort
      */
-    public function setChargingType(\AppBundle\Entity\ChargingType $chargingType = null)
+    public function setChargingType(ChargingType $chargingType = null)
     {
         $this->chargingType = $chargingType;
 
@@ -190,7 +190,7 @@ class ActivityEffort
     /**
      * Get chargingType
      *
-     * @return \AppBundle\Entity\ChargingType
+     * @return ChargingType
      */
     public function getChargingType()
     {

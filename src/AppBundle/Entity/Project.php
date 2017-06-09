@@ -67,11 +67,11 @@ class Project
     /**
      * Add process
      *
-     * @param \AppBundle\Entity\Process $process
+     * @param Process $process
      *
      * @return Project
      */
-    public function addProcess(\AppBundle\Entity\Process $process)
+    public function addProcess(Process $process)
     {
         $this->processes[] = $process;
 
@@ -81,9 +81,9 @@ class Project
     /**
      * Remove process
      *
-     * @param \AppBundle\Entity\Process $process
+     * @param Process $process
      */
-    public function removeProcess(\AppBundle\Entity\Process $process)
+    public function removeProcess(Process $process)
     {
         $this->processes->removeElement($process);
     }

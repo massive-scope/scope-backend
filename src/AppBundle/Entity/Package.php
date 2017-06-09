@@ -48,24 +48,29 @@ class Package
     private $activities;
 
     /**
-     * @var \AppBundle\Entity\Process
+     * @var Process
      */
     private $process;
 
     /**
-     * @var \AppBundle\Entity\User
+     * @var User
      */
     private $user;
 
     /**
-     * @var \AppBundle\Entity\ChargingType
+     * @var ChargingType
      */
     private $chargingType;
 
     /**
-     * @var \AppBundle\Entity\Status
+     * @var Status
      */
     private $status;
+    
+    /**
+     * @var Appointment
+     */
+    private $appointment;
 
     /**
      * Constructor
@@ -238,11 +243,11 @@ class Package
     /**
      * Add activity
      *
-     * @param \AppBundle\Entity\Activity $activity
+     * @param Activity $activity
      *
      * @return Package
      */
-    public function addActivity(\AppBundle\Entity\Activity $activity)
+    public function addActivity(Activity $activity)
     {
         $this->activities[] = $activity;
 
@@ -252,9 +257,9 @@ class Package
     /**
      * Remove activity
      *
-     * @param \AppBundle\Entity\Activity $activity
+     * @param Activity $activity
      */
-    public function removeActivity(\AppBundle\Entity\Activity $activity)
+    public function removeActivity(Activity $activity)
     {
         $this->activities->removeElement($activity);
     }
@@ -272,11 +277,11 @@ class Package
     /**
      * Set process
      *
-     * @param \AppBundle\Entity\Process $process
+     * @param Process $process
      *
      * @return Package
      */
-    public function setProcess(\AppBundle\Entity\Process $process)
+    public function setProcess(Process $process)
     {
         $this->process = $process;
 
@@ -286,7 +291,7 @@ class Package
     /**
      * Get process
      *
-     * @return \AppBundle\Entity\Process
+     * @return Process
      */
     public function getProcess()
     {
@@ -296,11 +301,11 @@ class Package
     /**
      * Set user
      *
-     * @param \AppBundle\Entity\User $user
+     * @param User $user
      *
      * @return Package
      */
-    public function setUser(\AppBundle\Entity\User $user = null)
+    public function setUser(User $user = null)
     {
         $this->user = $user;
 
@@ -310,7 +315,7 @@ class Package
     /**
      * Get user
      *
-     * @return \AppBundle\Entity\User
+     * @return User
      */
     public function getUser()
     {
@@ -320,11 +325,11 @@ class Package
     /**
      * Set chargingType
      *
-     * @param \AppBundle\Entity\ChargingType $chargingType
+     * @param ChargingType $chargingType
      *
      * @return Package
      */
-    public function setChargingType(\AppBundle\Entity\ChargingType $chargingType = null)
+    public function setChargingType(ChargingType $chargingType = null)
     {
         $this->chargingType = $chargingType;
 
@@ -334,7 +339,7 @@ class Package
     /**
      * Get chargingType
      *
-     * @return \AppBundle\Entity\ChargingType
+     * @return ChargingType
      */
     public function getChargingType()
     {
@@ -344,11 +349,11 @@ class Package
     /**
      * Set status
      *
-     * @param \AppBundle\Entity\Status $status
+     * @param Status $status
      *
      * @return Package
      */
-    public function setStatus(\AppBundle\Entity\Status $status = null)
+    public function setStatus(Status $status = null)
     {
         $this->status = $status;
 
@@ -358,10 +363,34 @@ class Package
     /**
      * Get status
      *
-     * @return \AppBundle\Entity\Status
+     * @return Status
      */
     public function getStatus()
     {
         return $this->status;
+    }
+
+    /**
+     * Set appointment
+     *
+     * @param Appointment $appointment
+     *
+     * @return Package
+     */
+    public function setAppointment(Appointment $appointment = null)
+    {
+        $this->appointment = $appointment;
+
+        return $this;
+    }
+
+    /**
+     * Get appointment
+     *
+     * @return Appointment
+     */
+    public function getAppointment()
+    {
+        return $this->appointment;
     }
 }

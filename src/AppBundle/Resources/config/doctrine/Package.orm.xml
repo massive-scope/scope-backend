@@ -10,7 +10,6 @@
         </id>
 
         <!-- TODO
-            - idAppointments
             - idBudgets
         -->
 
@@ -26,6 +25,12 @@
         <many-to-one field="process" target-entity="AppBundle\Entity\Process" inversed-by="packages">
             <join-columns>
                 <join-column name="idProcesses" referenced-column-name="id" on-delete="CASCADE" nullable="false"/>
+            </join-columns>
+        </many-to-one>
+
+        <many-to-one field="appointment" target-entity="AppBundle\Entity\Appointment">
+            <join-columns>
+                <join-column name="idAppointments" referenced-column-name="id" on-delete="SET NULL" nullable="true"/>
             </join-columns>
         </many-to-one>
 
