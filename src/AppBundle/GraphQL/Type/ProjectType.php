@@ -2,6 +2,7 @@
 
 namespace AppBundle\GraphQL\Type;
 
+use AppBundle\GraphQL\Query\Package\PackagesField;
 use Youshido\GraphQL\Type\NonNullType;
 use Youshido\GraphQL\Type\Object\AbstractObjectType;
 use Youshido\GraphQL\Type\Scalar\DateTimeType;
@@ -21,6 +22,7 @@ class ProjectType extends AbstractObjectType
                 'hours' => new FloatType(),
                 'startDate' => new DateTimeType(),
                 'endDate' => new DateTimeType(),
+                'packages' => new PackagesField(false),
             ]
         );
     }

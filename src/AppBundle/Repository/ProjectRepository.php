@@ -4,6 +4,7 @@ namespace AppBundle\Repository;
 
 use Doctrine\ORM\QueryBuilder;
 use Youshido\GraphQL\Parser\Ast\Field;
+use Youshido\GraphQL\Parser\Ast\Query;
 
 /**
  * ProjectRepository
@@ -28,6 +29,10 @@ class ProjectRepository extends \Doctrine\ORM\EntityRepository
         $queryBuilder->leftJoin($alias . '.processes', $processAlias);
 
         foreach ($fields as $index => $field) {
+            if ($field instanceof Query) {
+                continue;
+            }
+
             $fieldAlias = in_array($field->getName(), self::PROCESS_FIELDS) ? $processAlias : $alias;
             $fieldName = $fieldAlias . '.' . $field->getName();
             if ($index === 0) {

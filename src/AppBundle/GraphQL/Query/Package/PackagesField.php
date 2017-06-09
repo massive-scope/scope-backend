@@ -15,10 +15,29 @@ class PackagesField extends AbstractContainerAwareField
 {
     use PackageQueryBuilderTrait;
 
+    /**
+     * @var bool
+     */
+    private $hasId;
+
+    /**
+     * @param bool $hasId
+     */
+    public function __construct($hasId = true)
+    {
+        $this->hasId = $hasId;
+
+        parent::__construct();
+    }
+
+
     public function build(FieldConfig $config)
     {
+        if ($this->hasId) {
+            $this->addArgument('id', new IntType());
+        }
+
         $this->addArgument('project', new IntType());
-        $this->addArgument('id', new IntType());
         $this->addArgument('title', new StringType());
         $this->addArgument('offset', new IntType());
         $this->addArgument('size', new IntType());
@@ -31,15 +50,16 @@ class PackagesField extends AbstractContainerAwareField
         $repository = $entityManager->getRepository(Package::class);
         $queryBuilder = $repository->createQueryBuilder('entity');
 
-        if (array_key_exists('id', $args)) {
-            $queryBuilder->where('entity.id = :id')->setParameter('id', $args['id']);
+        $id = array_key_exists('id', $args) ? $args['id'] : array_key_exists('id', $value) ? $value['id'] : null;
+        if ($id) {
+            $queryBuilder->where('entity.id = :id')->setParameter('id', $id);
         }
 
         if (array_key_exists('title', $args)) {
             $queryBuilder->where('entity.title LIKE :title')->setParameter('title', '%' . $args['title'] . '%');
         }
 
-        if (array_key_exists('project', $args)) {
+        if ($info->getFieldAST('project')) {
             $queryBuilder->leftJoin('entity.process', 'process')
                 ->andWhere('IDENTITY(process.project) = :project')
                 ->setParameter('project', $args['project']);
