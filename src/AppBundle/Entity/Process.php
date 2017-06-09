@@ -10,12 +10,12 @@ class Process
     /**
      * @var boolean
      */
-    private $isTemplate;
+    private $isTemplate = false;
 
     /**
      * @var boolean
      */
-    private $isTaskList;
+    private $isTaskList = false;
 
     /**
      * @var string
@@ -60,12 +60,12 @@ class Process
     /**
      * @var integer
      */
-    private $workLoad;
+    private $workLoad = 5;
 
     /**
      * @var boolean
      */
-    private $bankHolidayWork;
+    private $bankHolidayWork  =false;
 
     /**
      * @var integer
@@ -110,8 +110,10 @@ class Process
     /**
      * Constructor
      */
-    public function __construct()
+    public function __construct(Project $project)
     {
+        $this->project = $project;
+
         $this->packages = new \Doctrine\Common\Collections\ArrayCollection();
     }
 

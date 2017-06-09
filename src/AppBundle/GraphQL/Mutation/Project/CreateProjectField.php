@@ -2,22 +2,32 @@
 
 namespace AppBundle\GraphQL\Mutation\Project;
 
+use AppBundle\Entity\Process;
 use AppBundle\Entity\Project;
 use AppBundle\GraphQL\Type\ProjectType;
 use Doctrine\ORM\EntityManagerInterface;
 use Youshido\GraphQL\Config\Field\FieldConfig;
 use Youshido\GraphQL\Execution\ResolveInfo;
 use Youshido\GraphQL\Type\NonNullType;
+use Youshido\GraphQL\Type\Scalar\DateTimeType;
+use Youshido\GraphQL\Type\Scalar\FloatType;
 use Youshido\GraphQL\Type\Scalar\StringType;
 use Youshido\GraphQLBundle\Field\AbstractContainerAwareField;
 
 class CreateProjectField extends AbstractContainerAwareField
 {
+    use ProjectMapperTrait;
+    use ProcessMapperTrait;
+
     public function build(FieldConfig $config)
     {
         $config->addArguments(
             [
                 'title' => new NonNullType(new StringType()),
+                'budget' => new FloatType(),
+                'hours' => new FloatType(),
+                'startDate' => new DateTimeType(),
+                'endDate' => new DateTimeType(),
             ]
         );
     }
@@ -28,8 +38,10 @@ class CreateProjectField extends AbstractContainerAwareField
         $entityManager = $this->get('doctrine.orm.entity_manager');
 
         $project = new Project();
-        $project->setTitle($args['title']);
-        $entityManager->persist($project);
+        $process = new Process($project);
+
+        $entityManager->persist($this->mapProject($args, $project));
+        $entityManager->persist($this->mapProcess($args, $process));
         $entityManager->flush();
 
         /** @var EntityManagerInterface $entityManager */
