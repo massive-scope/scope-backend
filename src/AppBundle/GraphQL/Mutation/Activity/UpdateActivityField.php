@@ -1,10 +1,10 @@
 <?php
 
-namespace AppBundle\GraphQL\Mutation\Package;
+namespace AppBundle\GraphQL\Mutation\Activity;
 
-use AppBundle\Entity\Package;
-use AppBundle\GraphQL\Query\Package\PackageQueryBuilderTrait;
-use AppBundle\GraphQL\Type\PackageType;
+use AppBundle\Entity\Activity;
+use AppBundle\GraphQL\Query\Activity\ActivityQueryBuilderTrait;
+use AppBundle\GraphQL\Type\ActivityType;
 use Doctrine\ORM\EntityManagerInterface;
 use Youshido\GraphQL\Config\Field\FieldConfig;
 use Youshido\GraphQL\Execution\ResolveInfo;
@@ -13,10 +13,10 @@ use Youshido\GraphQL\Type\Scalar\IntType;
 use Youshido\GraphQL\Type\Scalar\StringType;
 use Youshido\GraphQLBundle\Field\AbstractContainerAwareField;
 
-class UpdatePackageField extends AbstractContainerAwareField
+class UpdateActivityField extends AbstractContainerAwareField
 {
-    use PackageMapperTrait;
-    use PackageQueryBuilderTrait;
+    use ActivityMapperTrait;
+    use ActivityQueryBuilderTrait;
 
     public function build(FieldConfig $config)
     {
@@ -34,29 +34,29 @@ class UpdatePackageField extends AbstractContainerAwareField
         /** @var EntityManagerInterface $entityManager */
         $entityManager = $this->get('doctrine.orm.entity_manager');
 
-        $package = $entityManager->find(Package::class, $args['id']);
-        $this->mapPackage($args, $package);
+        $activity = $entityManager->find(Activity::class, $args['id']);
+        $this->mapActivity($args, $activity);
         $entityManager->flush();
 
         /** @var EntityManagerInterface $entityManager */
         $entityManager = $this->get('doctrine.orm.entity_manager');
-        $repository = $entityManager->getRepository(Package::class);
+        $repository = $entityManager->getRepository(Activity::class);
         $queryBuilder = $repository->createQueryBuilder('entity');
 
-        $queryBuilder->where('entity.id = :id')->setParameter('id', $package->getId());
-        $this->addPackageFields($info->getFieldASTList(), $queryBuilder);
+        $queryBuilder->where('entity.id = :id')->setParameter('id', $activity->getId());
+        $this->addActivityFields($info->getFieldASTList(), $queryBuilder);
 
         return $queryBuilder->getQuery()->getSingleResult();
     }
 
     public function getType()
     {
-        return new PackageType();
+        return new ActivityType();
     }
 
     public function getName()
     {
-        return 'packageUpdate';
+        return 'activityUpdate';
     }
 
     public function get($id)

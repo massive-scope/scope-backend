@@ -1,10 +1,10 @@
 <?php
 
-namespace AppBundle\GraphQL\Mutation\Package;
+namespace AppBundle\GraphQL\Mutation\Activity;
 
-use AppBundle\Entity\Package;
-use AppBundle\GraphQL\Query\Package\PackageQueryBuilderTrait;
-use AppBundle\GraphQL\Type\PackageType;
+use AppBundle\Entity\Activity;
+use AppBundle\GraphQL\Query\Activity\ActivityQueryBuilderTrait;
+use AppBundle\GraphQL\Type\ActivityType;
 use Doctrine\ORM\EntityManagerInterface;
 use Youshido\GraphQL\Config\Field\FieldConfig;
 use Youshido\GraphQL\Execution\ResolveInfo;
@@ -12,9 +12,9 @@ use Youshido\GraphQL\Type\NonNullType;
 use Youshido\GraphQL\Type\Scalar\IntType;
 use Youshido\GraphQLBundle\Field\AbstractContainerAwareField;
 
-class DeletePackageField extends AbstractContainerAwareField
+class DeleteActivityField extends AbstractContainerAwareField
 {
-    use PackageQueryBuilderTrait;
+    use ActivityQueryBuilderTrait;
 
     public function build(FieldConfig $config)
     {
@@ -29,13 +29,13 @@ class DeletePackageField extends AbstractContainerAwareField
     {
         /** @var EntityManagerInterface $entityManager */
         $entityManager = $this->get('doctrine.orm.entity_manager');
-        $repository = $entityManager->getRepository(Package::class);
+        $repository = $entityManager->getRepository(Activity::class);
 
         $queryBuilder = $repository->createQueryBuilder('entity');
-        $result = $queryBuilder->where('entity.id = ' . $args['id'])->getQuery()->getSingleResult();
-        $this->addPackageFields($info->getFieldASTList(), $queryBuilder);
+        $result = $queryBuilder->where('entity.id = ' . $args['id'])->getQuery()->getArrayResult()[0];
+        $this->addActivityFields($info->getFieldASTList(), $queryBuilder);
 
-        $entityManager->remove($entityManager->getReference(Package::class, $args['id']));
+        $entityManager->remove($entityManager->getReference(Activity::class, $args['id']));
         $entityManager->flush();
 
         return $result;
@@ -43,12 +43,12 @@ class DeletePackageField extends AbstractContainerAwareField
 
     public function getType()
     {
-        return new PackageType();
+        return new ActivityType();
     }
 
     public function getName()
     {
-        return 'packageDelete';
+        return 'activityDelete';
     }
 
     public function get($id)

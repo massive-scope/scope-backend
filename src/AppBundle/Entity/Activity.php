@@ -113,10 +113,14 @@ class Activity
     private $company;
 
     /**
-     * Constructor
+     * Activity constructor.
+     *
+     * @param Package $package
      */
-    public function __construct()
+    public function __construct(Package $package)
     {
+        $this->package = $package;
+        
         $this->efforts = new \Doctrine\Common\Collections\ArrayCollection();
         $this->lastUpdate = new \DateTime();
     }

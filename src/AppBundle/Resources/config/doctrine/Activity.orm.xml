@@ -16,7 +16,7 @@
         <field name="duration" type="integer" nullable="true"/>
         <field name="period" type="integer" nullable="true"/>
         <field name="title" type="string" column="title" length="255"/>
-        <field name="description" type="string" column="description" length="255"/>
+        <field name="description" type="string" column="description" length="255" nullable="true"/>
         <field name="charged" type="boolean" column="charged"/>
         <field name="sortOrder" type="integer" column="sortOrder"/>
         <field name="date" type="datetime" column="date" nullable="true"/>

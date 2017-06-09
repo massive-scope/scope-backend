@@ -17,10 +17,26 @@ use Youshido\GraphQLBundle\Field\AbstractContainerAwareField;
 class PackageField extends AbstractContainerAwareField
 {
     use PackageQueryBuilderTrait;
+    /**
+     * @var bool
+     */
+    private $hasId;
+
+    /**
+     * @param bool $hasId
+     */
+    public function __construct($hasId = true)
+    {
+        $this->hasId = $hasId;
+
+        parent::__construct();
+    }
 
     public function build(FieldConfig $config)
     {
-        $this->addArgument('id', new NonNullType(new IntType()));
+        if ($this->hasId) {
+            $this->addArgument('id', new NonNullType(new IntType()));
+        }
     }
 
     public function resolve($value, array $args, ResolveInfo $info)
