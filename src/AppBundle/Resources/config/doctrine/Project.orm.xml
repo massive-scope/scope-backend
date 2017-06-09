@@ -11,6 +11,6 @@
 
         <field name="title" type="string" column="title" length="255"/>
 
-        <!--<one-to-many field="processes" target-entity="AppBundle\Entity\Process" mapped-by="project"/>-->
+        <one-to-many field="processes" target-entity="AppBundle\Entity\Process" mapped-by="project"/>
     </entity>
 </doctrine-mapping>
