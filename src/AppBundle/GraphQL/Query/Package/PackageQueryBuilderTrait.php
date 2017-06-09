@@ -10,7 +10,7 @@ trait PackageQueryBuilderTrait
     public function addPackageFields(array $fields, QueryBuilder $queryBuilder, $alias = 'entity')
     {
         foreach ($fields as $index => $field) {
-            if ($field instanceof Query) {
+            if ($field instanceof Query || $field->getName() === '__typename') {
                 continue;
             }
 

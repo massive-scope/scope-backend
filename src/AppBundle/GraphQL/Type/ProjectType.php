@@ -23,6 +23,12 @@ class ProjectType extends AbstractObjectType
                 'startDate' => new DateTimeType(),
                 'endDate' => new DateTimeType(),
                 'packages' => new PackagesField(false),
+                '__typename' => [
+                    'type' => new  StringType(),
+                    'resolver' => function () {
+                        return 'Project';
+                    },
+                ],
             ]
         );
     }

@@ -43,11 +43,11 @@ class PackageField extends AbstractContainerAwareField
         $repository = $entityManager->getRepository(Package::class);
         $queryBuilder = $repository->createQueryBuilder('entity');
         $this->addPackageFields($info->getFieldASTList(), $queryBuilder);
-
+/*
         if ($projectField = $info->getFieldAST('project')) {
             $queryBuilder->leftJoin('entity.process', 'process')->addSelect('IDENTITY(process.project) as projectID');
         }
-
+*/
         return $queryBuilder
             ->where('entity.id = :id')
             ->setParameter('id', $args['id'])

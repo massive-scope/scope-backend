@@ -18,6 +18,12 @@ class PackageType extends AbstractObjectType
                 'title' => new StringType(),
                 'description' => new StringType(),
                 'project' => new ProjectField(false),
+                '__typename' => [
+                    'type' => new  StringType(),
+                    'resolver' => function () {
+                        return 'Package';
+                    },
+                ],
             ]
         );
     }
