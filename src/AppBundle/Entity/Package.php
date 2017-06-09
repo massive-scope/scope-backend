@@ -25,12 +25,12 @@ class Package
     /**
      * @var boolean
      */
-    private $hasTimetracking;
+    private $hasTimetracking = false;
 
     /**
      * @var integer
      */
-    private $sortOrder;
+    private $sortOrder = 0;
 
     /**
      * @var \DateTime
@@ -73,6 +73,7 @@ class Package
     public function __construct()
     {
         $this->activities = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->lastStatusUpdate = new \DateTime();
     }
 
     /**
