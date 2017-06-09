@@ -88,27 +88,27 @@ class Activity
     private $efforts;
 
     /**
-     * @var \AppBundle\Entity\Package
+     * @var Package
      */
     private $package;
 
     /**
-     * @var \AppBundle\Entity\Status
+     * @var Status
      */
     private $status;
 
     /**
-     * @var \AppBundle\Entity\User
+     * @var User
      */
     private $user;
 
     /**
-     * @var \AppBundle\Entity\User
+     * @var User
      */
     private $creator;
 
     /**
-     * @var \AppBundle\Entity\Company
+     * @var Company
      */
     private $company;
 
@@ -470,11 +470,11 @@ class Activity
     /**
      * Add effort
      *
-     * @param \AppBundle\Entity\ActivityEffort $effort
+     * @param ActivityEffort $effort
      *
      * @return Activity
      */
-    public function addEffort(\AppBundle\Entity\ActivityEffort $effort)
+    public function addEffort(ActivityEffort $effort)
     {
         $this->efforts[] = $effort;
 
@@ -484,9 +484,9 @@ class Activity
     /**
      * Remove effort
      *
-     * @param \AppBundle\Entity\ActivityEffort $effort
+     * @param ActivityEffort $effort
      */
-    public function removeEffort(\AppBundle\Entity\ActivityEffort $effort)
+    public function removeEffort(ActivityEffort $effort)
     {
         $this->efforts->removeElement($effort);
     }
@@ -504,11 +504,11 @@ class Activity
     /**
      * Set package
      *
-     * @param \AppBundle\Entity\Package $package
+     * @param Package $package
      *
      * @return Activity
      */
-    public function setPackage(\AppBundle\Entity\Package $package)
+    public function setPackage(Package $package)
     {
         $this->package = $package;
 
@@ -518,7 +518,7 @@ class Activity
     /**
      * Get package
      *
-     * @return \AppBundle\Entity\Package
+     * @return Package
      */
     public function getPackage()
     {
@@ -528,11 +528,11 @@ class Activity
     /**
      * Set status
      *
-     * @param \AppBundle\Entity\Status $status
+     * @param Status $status
      *
      * @return Activity
      */
-    public function setStatus(\AppBundle\Entity\Status $status = null)
+    public function setStatus(Status $status = null)
     {
         $this->status = $status;
 
@@ -542,7 +542,7 @@ class Activity
     /**
      * Get status
      *
-     * @return \AppBundle\Entity\Status
+     * @return Status
      */
     public function getStatus()
     {
@@ -552,11 +552,11 @@ class Activity
     /**
      * Set user
      *
-     * @param \AppBundle\Entity\User $user
+     * @param User $user
      *
      * @return Activity
      */
-    public function setUser(\AppBundle\Entity\User $user = null)
+    public function setUser(User $user = null)
     {
         $this->user = $user;
 
@@ -566,7 +566,7 @@ class Activity
     /**
      * Get user
      *
-     * @return \AppBundle\Entity\User
+     * @return User
      */
     public function getUser()
     {
@@ -576,11 +576,11 @@ class Activity
     /**
      * Set creator
      *
-     * @param \AppBundle\Entity\User $creator
+     * @param User $creator
      *
      * @return Activity
      */
-    public function setCreator(\AppBundle\Entity\User $creator = null)
+    public function setCreator(User $creator = null)
     {
         $this->creator = $creator;
 
@@ -590,7 +590,7 @@ class Activity
     /**
      * Get creator
      *
-     * @return \AppBundle\Entity\User
+     * @return User
      */
     public function getCreator()
     {
@@ -600,11 +600,11 @@ class Activity
     /**
      * Set company
      *
-     * @param \AppBundle\Entity\Company $company
+     * @param Company $company
      *
      * @return Activity
      */
-    public function setCompany(\AppBundle\Entity\Company $company = null)
+    public function setCompany(Company $company = null)
     {
         $this->company = $company;
 
@@ -614,7 +614,7 @@ class Activity
     /**
      * Get company
      *
-     * @return \AppBundle\Entity\Company
+     * @return Company
      */
     public function getCompany()
     {

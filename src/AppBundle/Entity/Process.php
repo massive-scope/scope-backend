@@ -78,32 +78,32 @@ class Process
     private $packages;
 
     /**
-     * @var \AppBundle\Entity\Project
+     * @var Project
      */
     private $project;
 
     /**
-     * @var \AppBundle\Entity\Status
+     * @var Status
      */
     private $status;
 
     /**
-     * @var \AppBundle\Entity\Company
+     * @var Company
      */
     private $company;
 
     /**
-     * @var \AppBundle\Entity\ChargingType
+     * @var ChargingType
      */
     private $chargingType;
 
     /**
-     * @var \AppBundle\Entity\User
+     * @var User
      */
     private $assistant;
 
     /**
-     * @var \AppBundle\Entity\User
+     * @var User
      */
     private $user;
 
@@ -425,11 +425,11 @@ class Process
     /**
      * Add package
      *
-     * @param \AppBundle\Entity\Package $package
+     * @param Package $package
      *
      * @return Process
      */
-    public function addPackage(\AppBundle\Entity\Package $package)
+    public function addPackage(Package $package)
     {
         $this->packages[] = $package;
 
@@ -439,9 +439,9 @@ class Process
     /**
      * Remove package
      *
-     * @param \AppBundle\Entity\Package $package
+     * @param Package $package
      */
-    public function removePackage(\AppBundle\Entity\Package $package)
+    public function removePackage(Package $package)
     {
         $this->packages->removeElement($package);
     }
@@ -459,11 +459,11 @@ class Process
     /**
      * Set project
      *
-     * @param \AppBundle\Entity\Project $project
+     * @param Project $project
      *
      * @return Process
      */
-    public function setProject(\AppBundle\Entity\Project $project)
+    public function setProject(Project $project)
     {
         $this->project = $project;
 
@@ -473,7 +473,7 @@ class Process
     /**
      * Get project
      *
-     * @return \AppBundle\Entity\Project
+     * @return Project
      */
     public function getProject()
     {
@@ -483,11 +483,11 @@ class Process
     /**
      * Set status
      *
-     * @param \AppBundle\Entity\Status $status
+     * @param Status $status
      *
      * @return Process
      */
-    public function setStatus(\AppBundle\Entity\Status $status = null)
+    public function setStatus(Status $status = null)
     {
         $this->status = $status;
 
@@ -497,7 +497,7 @@ class Process
     /**
      * Get status
      *
-     * @return \AppBundle\Entity\Status
+     * @return Status
      */
     public function getStatus()
     {
@@ -507,11 +507,11 @@ class Process
     /**
      * Set company
      *
-     * @param \AppBundle\Entity\Company $company
+     * @param Company $company
      *
      * @return Process
      */
-    public function setCompany(\AppBundle\Entity\Company $company = null)
+    public function setCompany(Company $company = null)
     {
         $this->company = $company;
 
@@ -521,7 +521,7 @@ class Process
     /**
      * Get company
      *
-     * @return \AppBundle\Entity\Company
+     * @return Company
      */
     public function getCompany()
     {
@@ -531,11 +531,11 @@ class Process
     /**
      * Set chargingType
      *
-     * @param \AppBundle\Entity\ChargingType $chargingType
+     * @param ChargingType $chargingType
      *
      * @return Process
      */
-    public function setChargingType(\AppBundle\Entity\ChargingType $chargingType = null)
+    public function setChargingType(ChargingType $chargingType = null)
     {
         $this->chargingType = $chargingType;
 
@@ -545,7 +545,7 @@ class Process
     /**
      * Get chargingType
      *
-     * @return \AppBundle\Entity\ChargingType
+     * @return ChargingType
      */
     public function getChargingType()
     {
@@ -555,11 +555,11 @@ class Process
     /**
      * Set assistant
      *
-     * @param \AppBundle\Entity\User $assistant
+     * @param User $assistant
      *
      * @return Process
      */
-    public function setAssistant(\AppBundle\Entity\User $assistant = null)
+    public function setAssistant(User $assistant = null)
     {
         $this->assistant = $assistant;
 
@@ -569,7 +569,7 @@ class Process
     /**
      * Get assistant
      *
-     * @return \AppBundle\Entity\User
+     * @return User
      */
     public function getAssistant()
     {
@@ -579,11 +579,11 @@ class Process
     /**
      * Set user
      *
-     * @param \AppBundle\Entity\User $user
+     * @param User $user
      *
      * @return Process
      */
-    public function setUser(\AppBundle\Entity\User $user = null)
+    public function setUser(User $user = null)
     {
         $this->user = $user;
 
@@ -593,7 +593,7 @@ class Process
     /**
      * Get user
      *
-     * @return \AppBundle\Entity\User
+     * @return User
      */
     public function getUser()
     {

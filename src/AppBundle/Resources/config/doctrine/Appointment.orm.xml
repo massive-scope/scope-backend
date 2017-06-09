@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity repository-class="AppBundle\Repository\AppointmentRepository"
+            name="AppBundle\Entity\Appointment"
+            table="appointments">
+        <id name="id" type="bigint" column="id">
+            <generator strategy="AUTO"/>
+        </id>
+
+        <field name="title" type="string" column="title" length="255"/>
+        <field name="description" type="text" column="description" nullable="true"/>
+        <field name="startDate" type="datetime" column="startDate"/>
+        <field name="endDate" type="datetime" column="endDate" nullable="true"/>
+        <field name="hasNotification" type="boolean" column="hasNotification"/>
+        <field name="isInternal" type="boolean" column="isInternal"/>
+        <field name="isAllDay" type="boolean" column="isAllDay"/>
+        <field name="lastStatusUpdate" type="datetime" column="lastStatusUpdate" nullable="true"/>
+
+        <many-to-one field="process" target-entity="AppBundle\Entity\Process" inversed-by="packages">
+            <join-columns>
+                <join-column name="idProcesses" referenced-column-name="id" on-delete="CASCADE" nullable="false"/>
+            </join-columns>
+        </many-to-one>
+
+        <many-to-one field="user" target-entity="AppBundle\Entity\User">
+            <join-columns>
+                <join-column name="idUsers" referenced-column-name="id" on-delete="SET NULL" nullable="true"/>
+            </join-columns>
+        </many-to-one>
+
+        <many-to-one field="status" target-entity="AppBundle\Entity\Status">
+            <join-columns>
+                <join-column name="idStatus" referenced-column-name="id" on-delete="SET NULL" nullable="true"/>
+            </join-columns>
+        </many-to-one>
+
+        <many-to-one field="package" target-entity="AppBundle\Entity\Package" inversed-by="activities">
+            <join-columns>
+                <join-column name="idPackages" referenced-column-name="id" on-delete="SET NULL" nullable="true"/>
+            </join-columns>
+        </many-to-one>
+
+        <many-to-one field="activity" target-entity="AppBundle\Entity\Activity" inversed-by="efforts">
+            <join-columns>
+                <join-column name="idActivites" referenced-column-name="id" on-delete="SET NULL" nullable="true"/>
+            </join-columns>
+        </many-to-one>
+    </entity>
+</doctrine-mapping>
