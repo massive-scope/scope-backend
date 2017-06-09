@@ -225,4 +225,62 @@ class User
     {
         return $this->id;
     }
+    /**
+     * @var Language
+     */
+    private $language;
+
+
+    /**
+     * Set language
+     *
+     * @param Language $language
+     *
+     * @return User
+     */
+    public function setLanguage(Language $language)
+    {
+        $this->language = $language;
+
+        return $this;
+    }
+
+    /**
+     * Get language
+     *
+     * @return Language
+     */
+    public function getLanguage()
+    {
+        return $this->language;
+    }
+    /**
+     * @var Contact
+     */
+    private $contact;
+
+
+    /**
+     * Set contact
+     *
+     * @param Contact $contact
+     *
+     * @return User
+     */
+    public function setContact(Contact $contact)
+    {
+        $this->contact = $contact;
+
+        return $this;
+    }
+
+    /**
+     * Get contact
+     *
+     * @return Contact
+     */
+    public function getContact()
+    {
+        return $this->contact;
+    }
 }

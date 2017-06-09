@@ -13,8 +13,20 @@
         <field name="pwd" type="string" column="pwd" length="255"/>
         <field name="internalHourlyRate" type="float" column="internalHourlyRate"/>
         <field name="externalHourlyRate" type="float" column="externalHourlyRate"/>
-        <field name="lastLogin" type="datetime" column="lastLogin"/>
+        <field name="lastLogin" type="datetime" column="lastLogin" nullable="true"/>
         <field name="locked" type="boolean" column="locked"/>
         <field name="passwordForgotten" type="boolean" column="passwordForgotten"/>
+
+        <many-to-one field="language" target-entity="AppBundle\Entity\Language">
+            <join-columns>
+                <join-column name="idLanguages" referenced-column-name="id" on-delete="CASCADE" nullable="false"/>
+            </join-columns>
+        </many-to-one>
+
+        <many-to-one field="contact" target-entity="AppBundle\Entity\Contact">
+            <join-columns>
+                <join-column name="idContacts" referenced-column-name="id" on-delete="CASCADE" nullable="false"/>
+            </join-columns>
+        </many-to-one>
     </entity>
 </doctrine-mapping>

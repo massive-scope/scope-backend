@@ -2,16 +2,13 @@
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
-    <entity repository-class="AppBundle\Repository\CompanyRepository"
-            name="AppBundle\Entity\Company"
-            table="companies">
+    <entity repository-class="AppBundle\Repository\UserTimetrackingTypeRepository"
+            name="AppBundle\Entity\UserTimetrackingType"
+            table="userTimetrackingTypes">
         <id name="id" type="bigint" column="id">
             <generator strategy="AUTO"/>
         </id>
 
-        <field name="name" type="string" column="name" length="255"/>
-        <field name="description" type="text" column="description" nullable="true"/>
-        <field name="logoExtension" type="string" column="logoExtension" length="16" nullable="true"/>
-        <field name="logoCounter" type="integer" column="logoCounter"/>
+        <field name="title" type="string" column="title" length="255"/>
     </entity>
 </doctrine-mapping>

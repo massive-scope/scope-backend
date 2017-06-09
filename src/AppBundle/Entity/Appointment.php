@@ -52,6 +52,31 @@ class Appointment
      */
     private $lastStatusUpdate;
 
+    /**
+     * @var Process
+     */
+    private $process;
+
+    /**
+     * @var User
+     */
+    private $user;
+
+    /**
+     * @var Status
+     */
+    private $status;
+
+    /**
+     * @var Package
+     */
+    private $package;
+
+    /**
+     * @var Activity
+     */
+    private $activity;
+
     public function __construct()
     {
         $this->startDate = new \DateTime();
@@ -259,40 +284,15 @@ class Appointment
     {
         return $this->lastStatusUpdate;
     }
-    /**
-     * @var \AppBundle\Entity\Process
-     */
-    private $process;
-
-    /**
-     * @var \AppBundle\Entity\User
-     */
-    private $user;
-
-    /**
-     * @var \AppBundle\Entity\Status
-     */
-    private $status;
-
-    /**
-     * @var \AppBundle\Entity\Package
-     */
-    private $package;
-
-    /**
-     * @var \AppBundle\Entity\Activity
-     */
-    private $activity;
-
 
     /**
      * Set process
      *
-     * @param \AppBundle\Entity\Process $process
+     * @param Process $process
      *
      * @return Appointment
      */
-    public function setProcess(\AppBundle\Entity\Process $process)
+    public function setProcess(Process $process)
     {
         $this->process = $process;
 
@@ -302,7 +302,7 @@ class Appointment
     /**
      * Get process
      *
-     * @return \AppBundle\Entity\Process
+     * @return Process
      */
     public function getProcess()
     {
@@ -312,11 +312,11 @@ class Appointment
     /**
      * Set user
      *
-     * @param \AppBundle\Entity\User $user
+     * @param User $user
      *
      * @return Appointment
      */
-    public function setUser(\AppBundle\Entity\User $user = null)
+    public function setUser(User $user = null)
     {
         $this->user = $user;
 
@@ -326,7 +326,7 @@ class Appointment
     /**
      * Get user
      *
-     * @return \AppBundle\Entity\User
+     * @return User
      */
     public function getUser()
     {
@@ -336,11 +336,11 @@ class Appointment
     /**
      * Set status
      *
-     * @param \AppBundle\Entity\Status $status
+     * @param Status $status
      *
      * @return Appointment
      */
-    public function setStatus(\AppBundle\Entity\Status $status = null)
+    public function setStatus(Status $status = null)
     {
         $this->status = $status;
 
@@ -350,7 +350,7 @@ class Appointment
     /**
      * Get status
      *
-     * @return \AppBundle\Entity\Status
+     * @return Status
      */
     public function getStatus()
     {
@@ -360,11 +360,11 @@ class Appointment
     /**
      * Set package
      *
-     * @param \AppBundle\Entity\Package $package
+     * @param Package $package
      *
      * @return Appointment
      */
-    public function setPackage(\AppBundle\Entity\Package $package = null)
+    public function setPackage(Package $package = null)
     {
         $this->package = $package;
 
@@ -374,7 +374,7 @@ class Appointment
     /**
      * Get package
      *
-     * @return \AppBundle\Entity\Package
+     * @return Package
      */
     public function getPackage()
     {
@@ -384,11 +384,11 @@ class Appointment
     /**
      * Set activity
      *
-     * @param \AppBundle\Entity\Activity $activity
+     * @param Activity $activity
      *
      * @return Appointment
      */
-    public function setActivity(\AppBundle\Entity\Activity $activity = null)
+    public function setActivity(Activity $activity = null)
     {
         $this->activity = $activity;
 
@@ -398,7 +398,7 @@ class Appointment
     /**
      * Get activity
      *
-     * @return \AppBundle\Entity\Activity
+     * @return Activity
      */
     public function getActivity()
     {

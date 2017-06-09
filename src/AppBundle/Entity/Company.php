@@ -22,6 +22,15 @@ class Company
      */
     private $id;
 
+    /**
+     * @var string
+     */
+    private $logoExtension;
+
+    /**
+     * @var integer
+     */
+    private $logoCounter = 0;
 
     /**
      * Set name
@@ -79,5 +88,53 @@ class Company
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set logoExtension
+     *
+     * @param string $logoExtension
+     *
+     * @return Company
+     */
+    public function setLogoExtension($logoExtension)
+    {
+        $this->logoExtension = $logoExtension;
+
+        return $this;
+    }
+
+    /**
+     * Get logoExtension
+     *
+     * @return string
+     */
+    public function getLogoExtension()
+    {
+        return $this->logoExtension;
+    }
+
+    /**
+     * Set logoCounter
+     *
+     * @param integer $logoCounter
+     *
+     * @return Company
+     */
+    public function setLogoCounter($logoCounter)
+    {
+        $this->logoCounter = $logoCounter;
+
+        return $this;
+    }
+
+    /**
+     * Get logoCounter
+     *
+     * @return integer
+     */
+    public function getLogoCounter()
+    {
+        return $this->logoCounter;
     }
 }
