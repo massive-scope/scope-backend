@@ -120,7 +120,7 @@ class Activity
     public function __construct(Package $package)
     {
         $this->package = $package;
-        
+
         $this->efforts = new \Doctrine\Common\Collections\ArrayCollection();
         $this->lastUpdate = new \DateTime();
     }
