@@ -25,7 +25,7 @@ class Package
     /**
      * @var boolean
      */
-    private $hasTimetracking;
+    private $hasTimetracking = true;
 
     /**
      * @var integer
@@ -69,9 +69,13 @@ class Package
 
     /**
      * Constructor
+     *
+     * @param Process $process
      */
-    public function __construct()
+    public function __construct(Process $process)
     {
+        $this->process = $process;
+
         $this->activities = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
