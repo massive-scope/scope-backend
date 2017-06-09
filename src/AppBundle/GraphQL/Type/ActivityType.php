@@ -20,6 +20,12 @@ class ActivityType extends AbstractObjectType
                 'description' => new StringType(),
                 'package' => new PackageField(false),
                 'activityEfforts' => new ActivityEffortsField(),
+                '__typename' => [
+                    'type' => new  StringType(),
+                    'resolver' => function () {
+                        return 'Activity';
+                    },
+                ],
             ]
         );
     }

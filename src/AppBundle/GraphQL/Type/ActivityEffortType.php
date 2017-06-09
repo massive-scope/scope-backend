@@ -21,6 +21,12 @@ class ActivityEffortType extends AbstractObjectType
                 'hours' => new FloatType(),
                 'description' => new StringType(),
                 'activity' => new ActivityField(false),
+                '__typename' => [
+                    'type' => new  StringType(),
+                    'resolver' => function () {
+                        return 'ActivityEffort';
+                    },
+                ],
             ]
         );
     }
