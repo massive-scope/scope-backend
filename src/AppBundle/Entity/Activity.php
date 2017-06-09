@@ -620,4 +620,3 @@ class Activity
         return $this->company;
     }
 }
-

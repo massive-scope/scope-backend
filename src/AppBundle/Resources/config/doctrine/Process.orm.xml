@@ -9,10 +9,6 @@
             <generator strategy="AUTO"/>
         </id>
 
-        <!-- TODO
-         - idClientCompanies
-        -->
-
         <field name="isTemplate" type="boolean" column="isTemplate"/>
         <field name="isTaskList" type="boolean" column="isTaskList"/>
         <field name="title" type="string" column="title" length="255" nullable="true"/>
@@ -25,6 +21,7 @@
         <field name="lastStatusUpdate" type="datetime" column="lastStatusUpdate"/>
         <field name="workLoad" type="integer" column="workLoad"/>
         <field name="bankHolidayWork" type="boolean" column="bankHolidayWork"/>
+        <field name="budgetPositionHRByTimetracking" type="boolean" column="budgetPositionHRByTimetracking"/>
 
         <one-to-many field="packages" target-entity="AppBundle\Entity\Package" mapped-by="project"/>
 

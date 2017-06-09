@@ -359,4 +359,3 @@ class Package
         return $this->status;
     }
 }
-

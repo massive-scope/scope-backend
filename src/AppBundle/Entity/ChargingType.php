@@ -52,4 +52,3 @@ class ChargingType
         return $this->id;
     }
 }
-

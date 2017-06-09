@@ -10,12 +10,12 @@ class Process
     /**
      * @var boolean
      */
-    private $isTemplate;
+    private $isTemplate = false;
 
     /**
      * @var boolean
      */
-    private $isTaskList;
+    private $isTaskList = false;
 
     /**
      * @var string
@@ -25,12 +25,12 @@ class Process
     /**
      * @var float
      */
-    private $budget;
+    private $budget = 0;
 
     /**
      * @var float
      */
-    private $hours;
+    private $hours = 0;
 
     /**
      * @var \DateTime
@@ -60,12 +60,12 @@ class Process
     /**
      * @var integer
      */
-    private $workLoad;
+    private $workLoad = 5;
 
     /**
      * @var boolean
      */
-    private $bankHolidayWork;
+    private $bankHolidayWork = false;
 
     /**
      * @var integer
@@ -108,11 +108,18 @@ class Process
     private $user;
 
     /**
+     * @var boolean
+     */
+    private $budgetPositionHRByTimetracking = false;
+
+    /**
      * Constructor
      */
     public function __construct()
     {
         $this->packages = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->startDate = new \DateTime();
+        $this->lastStatusUpdate = new \DateTime();
     }
 
     /**
@@ -590,5 +597,28 @@ class Process
     {
         return $this->user;
     }
-}
 
+    /**
+     * Set budgetPositionHRByTimetracking
+     *
+     * @param boolean $budgetPositionHRByTimetracking
+     *
+     * @return Process
+     */
+    public function setBudgetPositionHRByTimetracking($budgetPositionHRByTimetracking)
+    {
+        $this->budgetPositionHRByTimetracking = $budgetPositionHRByTimetracking;
+
+        return $this;
+    }
+
+    /**
+     * Get budgetPositionHRByTimetracking
+     *
+     * @return boolean
+     */
+    public function getBudgetPositionHRByTimetracking()
+    {
+        return $this->budgetPositionHRByTimetracking;
+    }
+}

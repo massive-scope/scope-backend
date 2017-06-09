@@ -81,4 +81,3 @@ class Company
         return $this->id;
     }
 }
-
