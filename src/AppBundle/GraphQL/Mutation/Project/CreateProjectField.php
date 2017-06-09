@@ -37,7 +37,7 @@ class CreateProjectField extends AbstractContainerAwareField
         $repository = $entityManager->getRepository(Project::class);
         $queryBuilder = $repository->createQueryBuilder('entity');
 
-        $queryBuilder->where('entity.id = :id', $project->getId());
+        $queryBuilder->where('entity.id = :id')->setParameter('id', $project->getId());
         $repository->addFields($info->getFieldASTList(), $queryBuilder);
 
         return $queryBuilder->getQuery()->getSingleResult();
