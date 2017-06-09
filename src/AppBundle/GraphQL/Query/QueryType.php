@@ -2,6 +2,8 @@
 
 namespace AppBundle\GraphQL\Query;
 
+use AppBundle\GraphQL\Query\Package\PackageField;
+use AppBundle\GraphQL\Query\Package\PackagesField;
 use AppBundle\GraphQL\Query\Project\ProjectField;
 use AppBundle\GraphQL\Query\Project\ProjectsField;
 use Youshido\GraphQL\Type\Object\AbstractObjectType;
@@ -12,8 +14,13 @@ class QueryType extends AbstractObjectType
     {
         $config->addFields(
             [
+                // projects
                 new ProjectsField(),
                 new ProjectField(),
+
+                // packages
+                new PackagesField(),
+                new PackageField(),
             ]
         );
     }

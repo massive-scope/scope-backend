@@ -2,6 +2,9 @@
 
 namespace AppBundle\GraphQL\Mutation;
 
+use AppBundle\GraphQL\Mutation\Package\CreatePackageField;
+use AppBundle\GraphQL\Mutation\Package\DeletePackageField;
+use AppBundle\GraphQL\Mutation\Package\UpdatePackageField;
 use AppBundle\GraphQL\Mutation\Project\CreateProjectField;
 use AppBundle\GraphQL\Mutation\Project\DeleteProjectField;
 use AppBundle\GraphQL\Mutation\Project\UpdateProjectField;
@@ -13,9 +16,15 @@ class MutationType extends AbstractObjectType
     {
         $config->addFields(
             [
+                // projects
                 new CreateProjectField(),
                 new UpdateProjectField(),
                 new DeleteProjectField(),
+
+                // packages
+                new CreatePackageField(),
+                new DeletePackageField(),
+                new UpdatePackageField(),
             ]
         );
     }
