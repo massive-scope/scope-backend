@@ -5,6 +5,9 @@ namespace AppBundle\GraphQL\Mutation;
 use AppBundle\GraphQL\Mutation\Activity\CreateActivityField;
 use AppBundle\GraphQL\Mutation\Activity\DeleteActivityField;
 use AppBundle\GraphQL\Mutation\Activity\UpdateActivityField;
+use AppBundle\GraphQL\Mutation\ActivityEffort\CreateActivityEffortField;
+use AppBundle\GraphQL\Mutation\ActivityEffort\DeleteActivityEffortField;
+use AppBundle\GraphQL\Mutation\ActivityEffort\UpdateActivityEffortField;
 use AppBundle\GraphQL\Mutation\Package\CreatePackageField;
 use AppBundle\GraphQL\Mutation\Package\DeletePackageField;
 use AppBundle\GraphQL\Mutation\Package\UpdatePackageField;
@@ -29,10 +32,15 @@ class MutationType extends AbstractObjectType
                 new DeletePackageField(),
                 new UpdatePackageField(),
 
-                // packages
+                // activities
                 new CreateActivityField(),
                 new DeleteActivityField(),
                 new UpdateActivityField(),
+
+                // activityEfforts
+                new CreateActivityEffortField(),
+                new DeleteActivityEffortField(),
+                new UpdateActivityEffortField(),
             ]
         );
     }

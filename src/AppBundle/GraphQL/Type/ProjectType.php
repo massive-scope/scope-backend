@@ -22,7 +22,7 @@ class ProjectType extends AbstractObjectType
                 'hours' => new FloatType(),
                 'startDate' => new DateTimeType(),
                 'endDate' => new DateTimeType(),
-                'packages' => new PackagesField(false),
+                'packages' => new PackagesField(),
             ]
         );
     }

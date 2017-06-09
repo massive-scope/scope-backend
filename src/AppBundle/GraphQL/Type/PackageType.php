@@ -2,6 +2,7 @@
 
 namespace AppBundle\GraphQL\Type;
 
+use AppBundle\GraphQL\Query\Activity\ActivitiesField;
 use AppBundle\GraphQL\Query\Project\ProjectField;
 use Youshido\GraphQL\Type\NonNullType;
 use Youshido\GraphQL\Type\Object\AbstractObjectType;
@@ -18,6 +19,7 @@ class PackageType extends AbstractObjectType
                 'title' => new StringType(),
                 'description' => new StringType(),
                 'project' => new ProjectField(false),
+                'activities' => new ActivitiesField(),
             ]
         );
     }

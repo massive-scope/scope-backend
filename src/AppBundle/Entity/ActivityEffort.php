@@ -30,8 +30,27 @@ class ActivityEffort
     /**
      * @var bool
      */
-    private $isTracking;
+    private $isTracking = false;
 
+    /**
+     * @var Activity
+     */
+    private $activity;
+
+    /**
+     * @var ChargingType
+     */
+    private $chargingType;
+
+    /**
+     * ActivityEffort constructor.
+     *
+     * @param Activity $activity
+     */
+    public function __construct(Activity $activity)
+    {
+        $this->activity = $activity;
+    }
 
     /**
      * Get id
@@ -138,16 +157,6 @@ class ActivityEffort
     {
         return $this->isTracking;
     }
-    /**
-     * @var Activity
-     */
-    private $activity;
-
-    /**
-     * @var ChargingType
-     */
-    private $chargingType;
-
 
     /**
      * Set activity

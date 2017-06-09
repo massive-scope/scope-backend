@@ -4,6 +4,8 @@ namespace AppBundle\GraphQL\Query;
 
 use AppBundle\GraphQL\Query\Activity\ActivitiesField;
 use AppBundle\GraphQL\Query\Activity\ActivityField;
+use AppBundle\GraphQL\Query\ActivityEffort\ActivityEffortField;
+use AppBundle\GraphQL\Query\ActivityEffort\ActivityEffortsField;
 use AppBundle\GraphQL\Query\Package\PackageField;
 use AppBundle\GraphQL\Query\Package\PackagesField;
 use AppBundle\GraphQL\Query\Project\ProjectField;
@@ -24,9 +26,13 @@ class QueryType extends AbstractObjectType
                 new PackagesField(),
                 new PackageField(),
 
-                // activites
+                // activities
                 new ActivityField(),
                 new ActivitiesField(),
+
+                // activityEfforts
+                new ActivityEffortField(),
+                new ActivityEffortsField(),
             ]
         );
     }

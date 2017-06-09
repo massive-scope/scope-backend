@@ -1,9 +1,9 @@
 <?php
 
-namespace AppBundle\GraphQL\Query\Project;
+namespace AppBundle\GraphQL\Query\ActivityEffort;
 
-use AppBundle\Entity\Project;
-use AppBundle\GraphQL\Type\ProjectsType;
+use AppBundle\Entity\ActivityEffort;
+use AppBundle\GraphQL\Type\ActivityEffortsType;
 use Doctrine\ORM\EntityManagerInterface;
 use Youshido\GraphQL\Config\Field\FieldConfig;
 use Youshido\GraphQL\Execution\ResolveInfo;
@@ -11,11 +11,14 @@ use Youshido\GraphQL\Type\Scalar\IntType;
 use Youshido\GraphQL\Type\Scalar\StringType;
 use Youshido\GraphQLBundle\Field\AbstractContainerAwareField;
 
-class ProjectsField extends AbstractContainerAwareField
+class ActivityEffortsField extends AbstractContainerAwareField
 {
+    use ActivityEffortQueryBuilderTrait;
+
     public function build(FieldConfig $config)
     {
-        $this->addArgument('title', new StringType());
+        $this->addArgument('activity', new IntType());
+        $this->addArgument('description', new StringType());
         $this->addArgument('offset', new IntType());
         $this->addArgument('size', new IntType());
     }
@@ -24,11 +27,17 @@ class ProjectsField extends AbstractContainerAwareField
     {
         /** @var EntityManagerInterface $entityManager */
         $entityManager = $this->get('doctrine.orm.entity_manager');
-        $repository = $entityManager->getRepository(Project::class);
+        $repository = $entityManager->getRepository(ActivityEffort::class);
         $queryBuilder = $repository->createQueryBuilder('entity');
 
-        if (array_key_exists('title', $args)) {
-            $repository->whereTitle($args['title'], $queryBuilder);
+        if (array_key_exists('description', $args)) {
+            $queryBuilder->where('entity.description LIKE :description')
+                ->setParameter('description', '%' . $args['description'] . '%');
+        }
+
+        if ($info->getFieldAST('activity')) {
+            $queryBuilder->andWhere('IDENTITY(entity.activity) = :activity')
+                ->setParameter('activity', $args['activity']);
         }
 
         $result = [];
@@ -40,7 +49,7 @@ class ProjectsField extends AbstractContainerAwareField
             return $result;
         }
 
-        $repository->addFields($field->getFields(), $queryBuilder);
+        $this->addActivityEffortFields($field->getFields(), $queryBuilder);
 
         if (array_key_exists('offset', $args)) {
             $queryBuilder->setFirstResult($args['offset']);
@@ -57,7 +66,7 @@ class ProjectsField extends AbstractContainerAwareField
 
     public function getType()
     {
-        return new ProjectsType();
+        return new ActivityEffortsType();
     }
 
     public function get($id)

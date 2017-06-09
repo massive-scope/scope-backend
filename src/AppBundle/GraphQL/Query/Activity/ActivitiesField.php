@@ -18,7 +18,6 @@ class ActivitiesField extends AbstractContainerAwareField
     public function build(FieldConfig $config)
     {
         $this->addArgument('package', new IntType());
-        $this->addArgument('id', new IntType());
         $this->addArgument('title', new StringType());
         $this->addArgument('offset', new IntType());
         $this->addArgument('size', new IntType());
@@ -30,10 +29,6 @@ class ActivitiesField extends AbstractContainerAwareField
         $entityManager = $this->get('doctrine.orm.entity_manager');
         $repository = $entityManager->getRepository(Activity::class);
         $queryBuilder = $repository->createQueryBuilder('entity');
-
-        if (array_key_exists('id', $args)) {
-            $queryBuilder->where('entity.id = :id')->setParameter('id', $args['id']);
-        }
 
         if (array_key_exists('title', $args)) {
             $queryBuilder->where('entity.title LIKE :title')->setParameter('title', '%' . $args['title'] . '%');
