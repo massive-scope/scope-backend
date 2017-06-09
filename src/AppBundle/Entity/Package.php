@@ -73,6 +73,7 @@ class Package
     public function __construct()
     {
         $this->activities = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->date = new \DateTime();
         $this->lastStatusUpdate = new \DateTime();
     }
 

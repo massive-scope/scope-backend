@@ -19,7 +19,7 @@
         <field name="description" type="string" column="description" length="255"/>
         <field name="charged" type="boolean" column="charged"/>
         <field name="sortOrder" type="integer" column="sortOrder"/>
-        <field name="date" type="datetime" column="date"/>
+        <field name="date" type="datetime" column="date" nullable="true"/>
         <field name="hasReminder" type="boolean" column="hasReminder"/>
         <field name="isInternal" type="boolean" column="isInternal"/>
         <field name="productionLevel" type="integer" column="productionLevel" nullable="true"/>
