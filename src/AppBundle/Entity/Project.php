@@ -8,24 +8,26 @@ namespace AppBundle\Entity;
 class Project
 {
     /**
-     * @var int
-     */
-    private $id;
-
-    /**
      * @var string
      */
     private $title;
 
+    /**
+     * @var integer
+     */
+    private $id;
 
     /**
-     * Get id
-     *
-     * @return int
+     * @var \Doctrine\Common\Collections\Collection
      */
-    public function getId()
+    private $processes;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
     {
-        return $this->id;
+        $this->processes = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -51,50 +53,49 @@ class Project
     {
         return $this->title;
     }
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $packages;
 
     /**
-     * Constructor
+     * Get id
+     *
+     * @return integer
      */
-    public function __construct()
+    public function getId()
     {
-        $this->packages = new \Doctrine\Common\Collections\ArrayCollection();
+        return $this->id;
     }
 
     /**
-     * Add package
+     * Add process
      *
-     * @param \AppBundle\Entity\Package $package
+     * @param \AppBundle\Entity\Process $process
      *
      * @return Project
      */
-    public function addPackage(\AppBundle\Entity\Package $package)
+    public function addProcess(\AppBundle\Entity\Process $process)
     {
-        $this->packages[] = $package;
+        $this->processes[] = $process;
 
         return $this;
     }
 
     /**
-     * Remove package
+     * Remove process
      *
-     * @param \AppBundle\Entity\Package $package
+     * @param \AppBundle\Entity\Process $process
      */
-    public function removePackage(\AppBundle\Entity\Package $package)
+    public function removeProcess(\AppBundle\Entity\Process $process)
     {
-        $this->packages->removeElement($package);
+        $this->processes->removeElement($process);
     }
 
     /**
-     * Get packages
+     * Get processes
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getPackages()
+    public function getProcesses()
     {
-        return $this->packages;
+        return $this->processes;
     }
 }
+

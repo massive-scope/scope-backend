@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity repository-class="AppBundle\Repository\ActivityEffortRepository"
+            name="AppBundle\Entity\ActivityEffort"
+            table="activityEfforts">
+        <id name="id" type="integer" column="id">
+            <generator strategy="AUTO"/>
+        </id>
+
+        <field name="date" type="datetime" column="date"/>
+        <field name="hours" type="float" column="hours"/>
+        <field name="description" type="text" column="description" nullable="true"/>
+        <field name="isTracking" type="boolean" column="isTracking"/>
+
+        <many-to-one field="activity" target-entity="AppBundle\Entity\Activity" inversed-by="efforts">
+            <join-columns>
+                <join-column name="idActivites" referenced-column-name="id" on-delete="CASCADE" nullable="false"/>
+            </join-columns>
+        </many-to-one>
+
+        <many-to-one field="chargingType" target-entity="AppBundle\Entity\ChargingType">
+            <join-columns>
+                <join-column name="idChargingTypes" referenced-column-name="id" on-delete="SET NULL" nullable="true"/>
+            </join-columns>
+        </many-to-one>
+    </entity>
+</doctrine-mapping>

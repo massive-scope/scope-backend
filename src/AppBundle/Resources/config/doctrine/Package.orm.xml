@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity repository-class="AppBundle\Repository\PackageRepository"
+            name="AppBundle\Entity\Package"
+            table="packages">
+        <id name="id" type="bigint" column-definition="bigint(20) unsigned NOT NULL AUTO_INCREMENT" column="id">
+            <generator strategy="AUTO"/>
+        </id>
+
+        <!-- TODO
+            - idAppointments
+            - idBudgets
+        -->
+
+        <field name="title" type="string" column="title" length="255"/>
+        <field name="description" type="string" column="description" length="255" nullable="true"/>
+        <field name="date" type="datetime" column="date" nullable="true"/>
+        <field name="hasTimetracking" type="boolean" column="hasTimetracking"/>
+        <field name="sortOrder" type="integer" column="sortOrder" nullable="true"/>
+        <field name="lastStatusUpdate" type="datetime" column="lastStatusUpdate"/>
+
+        <one-to-many field="activities" target-entity="AppBundle\Entity\Activity" mapped-by="package"/>
+
+        <many-to-one field="process" target-entity="AppBundle\Entity\Process" inversed-by="packages">
+            <join-columns>
+                <join-column name="idProcesses" referenced-column-name="id" on-delete="CASCADE" nullable="false"/>
+            </join-columns>
+        </many-to-one>
+
+        <many-to-one field="user" target-entity="AppBundle\Entity\User">
+            <join-columns>
+                <join-column name="idUsers" referenced-column-name="id" on-delete="SET NULL" nullable="true"/>
+            </join-columns>
+        </many-to-one>
+
+        <many-to-one field="chargingType" target-entity="AppBundle\Entity\ChargingType">
+            <join-columns>
+                <join-column name="idChargingTypes" referenced-column-name="id" on-delete="SET NULL" nullable="true"/>
+            </join-columns>
+        </many-to-one>
+
+        <many-to-one field="status" target-entity="AppBundle\Entity\Status">
+            <join-columns>
+                <join-column name="idStatus" referenced-column-name="id" on-delete="SET NULL" nullable="true"/>
+            </join-columns>
+        </many-to-one>
+    </entity>
+</doctrine-mapping>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity repository-class="AppBundle\Repository\ProcessRepository"
+            name="AppBundle\Entity\Process"
+            table="processes">
+        <id name="id" type="bigint" column-definition="bigint(20) unsigned NOT NULL AUTO_INCREMENT" column="id">
+            <generator strategy="AUTO"/>
+        </id>
+
+        <!-- TODO
+         - idClientCompanies
+        -->
+
+        <field name="isTemplate" type="boolean" column="isTemplate"/>
+        <field name="isTaskList" type="boolean" column="isTaskList"/>
+        <field name="title" type="string" column="title" length="255" nullable="true"/>
+        <field name="budget" type="float" column="budget" nullable="true"/>
+        <field name="hours" type="float" column="hours" nullable="true"/>
+        <field name="startDate" type="datetime" column="startDate" nullable="true"/>
+        <field name="endDate" type="datetime" column="endDate" nullable="true"/>
+        <field name="description" type="text" column="description" nullable="true"/>
+        <field name="statusDescription" type="text" column="statusDescription" nullable="true"/>
+        <field name="lastStatusUpdate" type="datetime" column="lastStatusUpdate"/>
+        <field name="workLoad" type="integer" column="workLoad"/>
+        <field name="bankHolidayWork" type="boolean" column="bankHolidayWork"/>
+
+        <one-to-many field="packages" target-entity="AppBundle\Entity\Package" mapped-by="project"/>
+
+        <many-to-one field="project" target-entity="AppBundle\Entity\Project" inversed-by="processes">
+            <join-columns>
+                <join-column name="idProjects" referenced-column-name="id" on-delete="CASCADE" nullable="false"/>
+            </join-columns>
+        </many-to-one>
+
+        <many-to-one field="status" target-entity="AppBundle\Entity\Status">
+            <join-columns>
+                <join-column name="idStatus" referenced-column-name="id" on-delete="SET NULL" nullable="true"/>
+            </join-columns>
+        </many-to-one>
+
+        <many-to-one field="company" target-entity="AppBundle\Entity\Company">
+            <join-columns>
+                <join-column name="idClientCompanies" referenced-column-name="id" on-delete="SET NULL" nullable="true"/>
+            </join-columns>
+        </many-to-one>
+
+        <many-to-one field="chargingType" target-entity="AppBundle\Entity\ChargingType">
+            <join-columns>
+                <join-column name="idChargingTypes" referenced-column-name="id" on-delete="SET NULL" nullable="true"/>
+            </join-columns>
+        </many-to-one>
+
+        <many-to-one field="assistant" target-entity="AppBundle\Entity\User">
+            <join-columns>
+                <join-column name="idAssistants" referenced-column-name="id" on-delete="SET NULL" nullable="true"/>
+            </join-columns>
+        </many-to-one>
+
+        <many-to-one field="user" target-entity="AppBundle\Entity\User">
+            <join-columns>
+                <join-column name="idUsers" referenced-column-name="id" on-delete="SET NULL" nullable="true"/>
+            </join-columns>
+        </many-to-one>
+    </entity>
+</doctrine-mapping>

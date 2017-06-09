@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity repository-class="AppBundle\Repository\ActivityRepository"
+            name="AppBundle\Entity\Activity"
+            table="activities">
+        <id name="id" type="bigint" column-definition="bigint(20) unsigned NOT NULL AUTO_INCREMENT" column="id">
+            <generator strategy="AUTO"/>
+        </id>
+
+        <!-- TODO
+            - idMilestones
+        -->
+
+        <field name="duration" type="integer" nullable="true"/>
+        <field name="period" type="integer" nullable="true"/>
+        <field name="title" type="string" column="title" length="255"/>
+        <field name="description" type="string" column="description" length="255"/>
+        <field name="charged" type="boolean" column="charged"/>
+        <field name="sortOrder" type="integer" column="sortOrder"/>
+        <field name="date" type="datetime" column="date"/>
+        <field name="hasReminder" type="boolean" column="hasReminder"/>
+        <field name="isInternal" type="boolean" column="isInternal"/>
+        <field name="productionLevel" type="integer" column="productionLevel" nullable="true"/>
+        <field name="projectedEffort" type="float" column="projectedEffort" nullable="true"/>
+        <field name="enteredEffort" type="float" column="enteredEffort" nullable="true"/>
+        <field name="statusDescription" type="text" column="statusDescription" nullable="true"/>
+        <field name="lastUpdate" type="datetime" column="lastUpdate"/>
+
+        <one-to-many field="efforts" target-entity="AppBundle\Entity\ActivityEffort" mapped-by="activity"/>
+
+        <many-to-one field="package" target-entity="AppBundle\Entity\Package" inversed-by="activities">
+            <join-columns>
+                <join-column name="idPackages" referenced-column-name="id" on-delete="CASCADE" nullable="false"/>
+            </join-columns>
+        </many-to-one>
+
+        <many-to-one field="status" target-entity="AppBundle\Entity\Status">
+            <join-columns>
+                <join-column name="idStatus" referenced-column-name="id" on-delete="SET NULL" nullable="true"/>
+            </join-columns>
+        </many-to-one>
+
+        <many-to-one field="user" target-entity="AppBundle\Entity\User">
+            <join-columns>
+                <join-column name="idUsers" referenced-column-name="id" on-delete="SET NULL" nullable="true"/>
+            </join-columns>
+        </many-to-one>
+
+        <many-to-one field="creator" target-entity="AppBundle\Entity\User">
+            <join-columns>
+                <join-column name="idCreator" referenced-column-name="id" on-delete="SET NULL" nullable="true"/>
+            </join-columns>
+        </many-to-one>
+
+        <many-to-one field="company" target-entity="AppBundle\Entity\Company">
+            <join-columns>
+                <join-column name="idCompanies" referenced-column-name="id" on-delete="SET NULL" nullable="true"/>
+            </join-columns>
+        </many-to-one>
+    </entity>
+</doctrine-mapping>
