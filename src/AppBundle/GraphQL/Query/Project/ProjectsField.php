@@ -29,11 +29,11 @@ class ProjectsField extends AbstractContainerAwareField
         $queryBuilder = $repository->createQueryBuilder('entity');
 
         if (array_key_exists('id', $args)) {
-            $queryBuilder->where('entity.id = ' . $args['id']);
+            $repository->whereId($args['id'], $queryBuilder);
         }
 
         if (array_key_exists('title', $args)) {
-            $queryBuilder->where('entity.title LIKE :title')->setParameter('title', '%' . $args['title'] . '%');
+            $repository->whereTitle($args['title'], $queryBuilder);
         }
 
         $result = [];
@@ -45,14 +45,7 @@ class ProjectsField extends AbstractContainerAwareField
             return $result;
         }
 
-        foreach ($field->getFields() as $index => $field) {
-            $fieldName = 'entity.' . $field->getName();
-            if ($index === 0) {
-                $queryBuilder->select($fieldName);
-            } else {
-                $queryBuilder->addSelect($fieldName);
-            }
-        }
+        $repository->addFields($field->getFields(), $queryBuilder);
 
         if (array_key_exists('offset', $args)) {
             $queryBuilder->setFirstResult($args['offset']);

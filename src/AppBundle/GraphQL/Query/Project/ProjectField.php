@@ -27,18 +27,12 @@ class ProjectField extends AbstractContainerAwareField
         $repository = $entityManager->getRepository(Project::class);
         $queryBuilder = $repository->createQueryBuilder('entity');
 
-        foreach ($info->getFieldASTList() as $index => $field) {
-            $fieldName = 'entity.' . $field->getName();
-            if ($index === 0) {
-                $queryBuilder->select($fieldName);
-            } else {
-                $queryBuilder->addSelect($fieldName);
-            }
-        }
+        $repository->addFields($info->getFieldASTList(), $queryBuilder);
 
-        $queryBuilder->where('entity.id = ' . $args['id']);
-
-        return $queryBuilder->getQuery()->getSingleResult();
+        return $queryBuilder
+            ->where('entity.id = ' . $args['id'])
+            ->getQuery()
+            ->getSingleResult();
     }
 
     public function getType()

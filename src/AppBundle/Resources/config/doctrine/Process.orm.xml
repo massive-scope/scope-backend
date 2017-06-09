@@ -5,7 +5,7 @@
     <entity repository-class="AppBundle\Repository\ProcessRepository"
             name="AppBundle\Entity\Process"
             table="processes">
-        <id name="id" type="bigint" column-definition="bigint(20) unsigned NOT NULL AUTO_INCREMENT" column="id">
+        <id name="id" type="bigint" column-definition="bigint(20) unsigned NOT NULL" column="id">
             <generator strategy="AUTO"/>
         </id>
 

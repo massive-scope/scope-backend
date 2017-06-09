@@ -33,7 +33,15 @@ class UpdateProjectField extends AbstractContainerAwareField
         $project->setTitle($args['title']);
         $entityManager->flush();
 
-        return $project;
+        /** @var EntityManagerInterface $entityManager */
+        $entityManager = $this->get('doctrine.orm.entity_manager');
+        $repository = $entityManager->getRepository(Project::class);
+        $queryBuilder = $repository->createQueryBuilder('entity');
+
+        $queryBuilder->where('entity.id = :id', $project->getId());
+        $repository->addFields($info->getFieldASTList(), $queryBuilder);
+
+        return $queryBuilder->getQuery()->getSingleResult();
     }
 
     public function getType()
