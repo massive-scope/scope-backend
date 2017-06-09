@@ -30,7 +30,8 @@ class ProjectField extends AbstractContainerAwareField
         $repository->addFields($info->getFieldASTList(), $queryBuilder);
 
         return $queryBuilder
-            ->where('entity.id = ' . $args['id'])
+            ->where('entity.id = :id')
+            ->setParameter('id', $args['id'])
             ->getQuery()
             ->getSingleResult();
     }

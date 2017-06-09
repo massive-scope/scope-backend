@@ -115,8 +115,10 @@ class Process
     /**
      * Constructor
      */
-    public function __construct()
+    public function __construct(Project $project)
     {
+        $this->project = $project;
+
         $this->packages = new \Doctrine\Common\Collections\ArrayCollection();
         $this->startDate = new \DateTime();
         $this->lastStatusUpdate = new \DateTime();

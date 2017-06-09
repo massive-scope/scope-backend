@@ -13,6 +13,8 @@ use Youshido\GraphQL\Parser\Ast\Field;
  */
 class ProjectRepository extends \Doctrine\ORM\EntityRepository
 {
+    const PROCESS_FIELDS = ['startDate', 'endDate', 'budget', 'hours'];
+
     /**
      * @param Field[] $fields
      * @param QueryBuilder $queryBuilder
@@ -22,8 +24,12 @@ class ProjectRepository extends \Doctrine\ORM\EntityRepository
      */
     public function addFields(array $fields, QueryBuilder $queryBuilder, $alias = 'entity')
     {
+        $processAlias = $alias . 'Process';
+        $queryBuilder->leftJoin($alias . '.processes', $processAlias);
+
         foreach ($fields as $index => $field) {
-            $fieldName = $alias . '.' . $field->getName();
+            $fieldAlias = in_array($field->getName(), self::PROCESS_FIELDS) ? $processAlias : $alias;
+            $fieldName = $fieldAlias . '.' . $field->getName();
             if ($index === 0) {
                 $queryBuilder->select($fieldName);
 
