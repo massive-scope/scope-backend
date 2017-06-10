@@ -3,6 +3,7 @@
 namespace AppBundle\CQRS\Projection\Project;
 
 use AppBundle\CQRS\Model\Project\Event\ProjectWasCreated;
+use AppBundle\CQRS\Model\Project\Event\ProjectWasDeleted;
 use AppBundle\Entity\Project;
 use AppBundle\Repository\ProjectRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -34,6 +35,14 @@ class ProjectProjector
         $project->setTitle($event->getTitle());
 
         $this->entityManager->persist($project);
+        $this->entityManager->flush();
+    }
+
+    public function onProjectWasDeleted(ProjectWasDeleted $event)
+    {
+        $project = $this->repository->find($event->getProjectId()->toString());
+
+        $this->entityManager->remove($project);
         $this->entityManager->flush();
     }
 }

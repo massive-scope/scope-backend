@@ -3,11 +3,17 @@
 namespace AppBundle\CQRS\Model\Project;
 
 use AppBundle\CQRS\Model\Project\Event\ProjectWasCreated;
+use AppBundle\CQRS\Model\Project\Event\ProjectWasDeleted;
 use Assert\Assertion;
 use Prooph\EventSourcing\AggregateRoot;
 
 class Project extends AggregateRoot
 {
+    /**
+     * @var bool
+     */
+    private $deleted = false;
+
     /**
      * @var ProjectId
      */
@@ -50,6 +56,11 @@ class Project extends AggregateRoot
         return $this->title;
     }
 
+    public function delete()
+    {
+        self::recordThat(ProjectWasDeleted::withData($this->projectId));
+    }
+
     protected function aggregateId()
     {
         return $this->projectId->toString();
@@ -59,5 +70,10 @@ class Project extends AggregateRoot
     {
         $this->projectId = $event->getProjectId();
         $this->title = $event->getTitle();
+    }
+
+    public function whenProjectWasDeleted(ProjectWasDeleted $event)
+    {
+        $this->deleted = true;
     }
 }

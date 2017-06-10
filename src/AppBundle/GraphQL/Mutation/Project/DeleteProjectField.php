@@ -2,13 +2,13 @@
 
 namespace AppBundle\GraphQL\Mutation\Project;
 
+use AppBundle\CQRS\Model\Project\Command\DeleteProject;
 use AppBundle\Entity\Project;
 use AppBundle\GraphQL\Type\ProjectType;
 use Doctrine\ORM\EntityManagerInterface;
 use Youshido\GraphQL\Config\Field\FieldConfig;
 use Youshido\GraphQL\Execution\ResolveInfo;
 use Youshido\GraphQL\Type\NonNullType;
-use Youshido\GraphQL\Type\Scalar\IntType;
 use Youshido\GraphQL\Type\Scalar\StringType;
 use Youshido\GraphQLBundle\Field\AbstractContainerAwareField;
 
@@ -18,7 +18,7 @@ class DeleteProjectField extends AbstractContainerAwareField
     {
         $config->addArguments(
             [
-                'id' => new NonNullType(new IntType()),
+                'id' => new NonNullType(new StringType()),
             ]
         );
     }
@@ -30,8 +30,8 @@ class DeleteProjectField extends AbstractContainerAwareField
         $repository = $entityManager->getRepository(Project::class);
         $result = $repository->get($value, $args, $info);
 
-        $entityManager->remove($entityManager->getReference(Project::class, $args['id']));
-        $entityManager->flush();
+        $command = DeleteProject::withData($args['id']);
+        $this->get('prooph_service_bus.todo_command_bus')->dispatch($command);
 
         return $result;
     }
