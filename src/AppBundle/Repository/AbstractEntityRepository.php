@@ -115,7 +115,7 @@ abstract class AbstractEntityRepository extends EntityRepository
         foreach ($this->getListFilters() as $searchField) {
             if (array_key_exists($searchField, $filter)) {
                 $select = $this->addJoin($queryBuilder, $searchField, $alias, $joines);
-                $queryBuilder->where($select . ' = :' . $searchField)
+                $queryBuilder->andWhere($select . ' = :' . $searchField)
                     ->setParameter($searchField, $filter[$searchField]);
             }
         }
@@ -136,7 +136,7 @@ abstract class AbstractEntityRepository extends EntityRepository
         foreach ($this->getListSearchFields() as $searchField) {
             if (array_key_exists($searchField, $args)) {
                 $select = $this->addJoin($queryBuilder, $searchField, $alias, $joines);
-                $queryBuilder->where($select . ' LIKE :' . $searchField)
+                $queryBuilder->andWhere($select . ' LIKE :' . $searchField)
                     ->setParameter($searchField, '%' . $args[$searchField] . '%');
             }
         }
