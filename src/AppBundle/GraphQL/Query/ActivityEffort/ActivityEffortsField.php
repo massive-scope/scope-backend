@@ -28,40 +28,12 @@ class ActivityEffortsField extends AbstractContainerAwareField
         /** @var EntityManagerInterface $entityManager */
         $entityManager = $this->get('doctrine.orm.entity_manager');
         $repository = $entityManager->getRepository(ActivityEffort::class);
-        $queryBuilder = $repository->createQueryBuilder('entity');
 
-        if (array_key_exists('description', $args)) {
-            $queryBuilder->where('entity.description LIKE :description')
-                ->setParameter('description', '%' . $args['description'] . '%');
-        }
-
-        if ($info->getFieldAST('activity')) {
-            $queryBuilder->andWhere('IDENTITY(entity.activity) = :activity')
-                ->setParameter('activity', $args['activity']);
-        }
-
-        $result = [];
-        if ($field = $info->getFieldAST('total')) {
-            $result['total'] = intval($queryBuilder->select('COUNT(entity.id)')->getQuery()->getSingleScalarResult());
-        }
-
-        if (!$field = $info->getFieldAST('items')) {
-            return $result;
-        }
-
-        $this->addActivityEffortFields($field->getFields(), $queryBuilder);
-
-        if (array_key_exists('offset', $args)) {
-            $queryBuilder->setFirstResult($args['offset']);
-        }
-
-        if (array_key_exists('size', $args)) {
-            $queryBuilder->setMaxResults($args['size']);
-        }
-
-        $result['items'] = $queryBuilder->getQuery()->getResult();
-
-        return $result;
+        return $repository->getList(
+            $value,
+            $args,
+            $info
+        );
     }
 
     public function getType()

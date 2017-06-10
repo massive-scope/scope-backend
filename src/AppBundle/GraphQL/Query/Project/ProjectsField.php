@@ -25,34 +25,12 @@ class ProjectsField extends AbstractContainerAwareField
         /** @var EntityManagerInterface $entityManager */
         $entityManager = $this->get('doctrine.orm.entity_manager');
         $repository = $entityManager->getRepository(Project::class);
-        $queryBuilder = $repository->createQueryBuilder('entity');
 
-        if (array_key_exists('title', $args)) {
-            $repository->whereTitle($args['title'], $queryBuilder);
-        }
-
-        $result = [];
-        if ($field = $info->getFieldAST('total')) {
-            $result['total'] = intval($queryBuilder->select('COUNT(entity.id)')->getQuery()->getSingleScalarResult());
-        }
-
-        if (!$field = $info->getFieldAST('items')) {
-            return $result;
-        }
-
-        $repository->addFields($field->getFields(), $queryBuilder);
-
-        if (array_key_exists('offset', $args)) {
-            $queryBuilder->setFirstResult($args['offset']);
-        }
-
-        if (array_key_exists('size', $args)) {
-            $queryBuilder->setMaxResults($args['size']);
-        }
-
-        $result['items'] = $queryBuilder->getQuery()->getResult();
-
-        return $result;
+        return $repository->getList(
+            $args,
+            $info,
+            $value
+        );
     }
 
     public function getType()

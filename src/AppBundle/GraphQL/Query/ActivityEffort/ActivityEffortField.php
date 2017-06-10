@@ -42,18 +42,8 @@ class ActivityEffortField extends AbstractContainerAwareField
         /** @var EntityManagerInterface $entityManager */
         $entityManager = $this->get('doctrine.orm.entity_manager');
         $repository = $entityManager->getRepository(ActivityEffort::class);
-        $queryBuilder = $repository->createQueryBuilder('entity');
-        $this->addActivityEffortFields($info->getFieldASTList(), $queryBuilder);
 
-        if ($projectField = $info->getFieldAST('activity')) {
-            $queryBuilder->leftJoin('entity.activity', 'activity')->addSelect('IDENTITY(entity.activity) as activity');
-        }
-
-        return $queryBuilder
-            ->where('entity.id = :id')
-            ->setParameter('id', $args['id'])
-            ->getQuery()
-            ->getSingleResult();
+        return $repository->get($value, $args, $info);
     }
 
     public function getType()

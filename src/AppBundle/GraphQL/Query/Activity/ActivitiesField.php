@@ -28,39 +28,12 @@ class ActivitiesField extends AbstractContainerAwareField
         /** @var EntityManagerInterface $entityManager */
         $entityManager = $this->get('doctrine.orm.entity_manager');
         $repository = $entityManager->getRepository(Activity::class);
-        $queryBuilder = $repository->createQueryBuilder('entity');
 
-        if (array_key_exists('title', $args)) {
-            $queryBuilder->where('entity.title LIKE :title')->setParameter('title', '%' . $args['title'] . '%');
-        }
-
-        if (array_key_exists('package', $args)) {
-            $queryBuilder->andWhere('IDENTITY(entity.package) = :package')
-                ->setParameter('package', $args['package']);
-        }
-
-        $result = [];
-        if ($field = $info->getFieldAST('total')) {
-            $result['total'] = intval($queryBuilder->select('COUNT(entity.id)')->getQuery()->getSingleScalarResult());
-        }
-
-        if (!$field = $info->getFieldAST('items')) {
-            return $result;
-        }
-
-        $this->addActivityFields($field->getFields(), $queryBuilder);
-
-        if (array_key_exists('offset', $args)) {
-            $queryBuilder->setFirstResult($args['offset']);
-        }
-
-        if (array_key_exists('size', $args)) {
-            $queryBuilder->setMaxResults($args['size']);
-        }
-
-        $result['items'] = $queryBuilder->getQuery()->getResult();
-
-        return $result;
+        return $repository->getList(
+            $value,
+            $args,
+            $info
+        );
     }
 
     public function getType()
