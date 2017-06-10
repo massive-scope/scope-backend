@@ -1,0 +1,8 @@
+services:
+  proophdo.todo_projection.project_finder:
+    class: AppBundle\CQRS\Projection\Project\ProjectFinder
+    arguments: ['@doctrine.orm.default_entity_manager']
+
+  proophdo.todo_projection.project_projector:
+    class: AppBundle\CQRS\Projection\Project\ProjectProjector
+    arguments: ['@doctrine.orm.default_entity_manager']

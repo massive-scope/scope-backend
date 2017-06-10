@@ -2,6 +2,8 @@
 
 namespace AppBundle\Entity;
 
+use Rhumsaa\Uuid\Uuid;
+
 /**
  * Project
  */
@@ -13,7 +15,7 @@ class Project
     private $title;
 
     /**
-     * @var integer
+     * @var string
      */
     private $id;
 
@@ -23,10 +25,12 @@ class Project
     private $processes;
 
     /**
-     * Constructor
+     * @param null $id
      */
-    public function __construct()
+    public function __construct($id = null)
     {
+        $this->id = $id ?: Uuid::uuid4()->toString();
+
         $this->processes = new \Doctrine\Common\Collections\ArrayCollection();
     }
 

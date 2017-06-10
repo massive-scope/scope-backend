@@ -2,6 +2,7 @@
 
 namespace AppBundle\GraphQL\Mutation\Project;
 
+use AppBundle\CQRS\Model\Project\Command\CreateProject;
 use AppBundle\Entity\Process;
 use AppBundle\Entity\Project;
 use AppBundle\GraphQL\Type\ProjectType;
@@ -34,21 +35,14 @@ class CreateProjectField extends AbstractContainerAwareField
 
     public function resolve($value, array $args, ResolveInfo $info)
     {
-        /** @var EntityManagerInterface $entityManager */
-        $entityManager = $this->get('doctrine.orm.entity_manager');
-
-        $project = new Project();
-        $process = new Process($project);
-
-        $entityManager->persist($this->mapProject($args, $project));
-        $entityManager->persist($this->mapProcess($args, $process));
-        $entityManager->flush();
+        $command = CreateProject::withData($args['title']);
+        $this->get('prooph_service_bus.todo_command_bus')->dispatch($command);
 
         /** @var EntityManagerInterface $entityManager */
         $entityManager = $this->get('doctrine.orm.entity_manager');
         $repository = $entityManager->getRepository(Project::class);
 
-        return $repository->get($value, ['id' => $project->getId()], $info);
+        return $repository->get($value, ['id' => $command->getProjectId()->toString()], $info);
     }
 
     public function getType()

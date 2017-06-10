@@ -5,8 +5,8 @@
     <entity repository-class="AppBundle\Repository\ProjectRepository"
             name="AppBundle\Entity\Project"
             table="projects">
-        <id name="id" type="bigint" column="id">
-            <generator strategy="AUTO"/>
+        <id name="id" type="guid" column="id">
+            <generator strategy="NONE"/>
         </id>
 
         <field name="title" type="string" column="title" length="255"/>

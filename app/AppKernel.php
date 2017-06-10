@@ -18,6 +18,11 @@ class AppKernel extends Kernel
             new AppBundle\AppBundle(),
 
             new Youshido\GraphQLBundle\GraphQLBundle(),
+
+            new \Prooph\Bundle\EventStore\ProophEventStoreBundle(),
+            new \Prooph\Bundle\ServiceBus\ProophServiceBusBundle(),
+
+            new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
