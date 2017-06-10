@@ -17,4 +17,14 @@ class UserRepository extends AbstractEntityRepository
     {
         return 'user';
     }
+
+    /**
+     * Get fields.
+     *
+     * return string[]
+     */
+    protected function getFields()
+    {
+        return [];
+    }
 }
