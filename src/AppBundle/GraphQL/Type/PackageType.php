@@ -21,9 +21,9 @@ class PackageType extends AbstractObjectType
                 'project' => new ProjectField(false),
                 'activities' => new ActivitiesField(),
                 '__typename' => [
-                    'type' => new  StringType(),
+                    'type' => new StringType(),
                     'resolver' => function () {
-                        return 'Package';
+                        return 'package';
                     },
                 ],
             ]

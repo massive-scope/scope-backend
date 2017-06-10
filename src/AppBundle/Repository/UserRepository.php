@@ -17,4 +17,30 @@ class UserRepository extends AbstractEntityRepository
     {
         return 'user';
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getFields()
+    {
+        return [
+            'id' => 'id',
+            'login' => 'login',
+            'internalHourlyRate' => 'internalHourlyRate',
+            'externalHourlyRate' => 'externalHourlyRate',
+            'lastLogin' => 'lastLogin',
+            'locked' => 'locked',
+            'passwordForgotten' => 'passwordForgotten',
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getListSearchFields()
+    {
+        return [
+            'login',
+        ];
+    }
 }

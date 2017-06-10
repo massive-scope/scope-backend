@@ -18,7 +18,7 @@ class PackagesType extends AbstractObjectType
                 '__typename' => [
                     'type' => new  StringType(),
                     'resolver' => function () {
-                        return 'Packages';
+                        return 'packages';
                     },
                 ],
             ]

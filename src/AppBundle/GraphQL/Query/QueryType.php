@@ -10,6 +10,9 @@ use AppBundle\GraphQL\Query\Package\PackageField;
 use AppBundle\GraphQL\Query\Package\PackagesField;
 use AppBundle\GraphQL\Query\Project\ProjectField;
 use AppBundle\GraphQL\Query\Project\ProjectsField;
+use AppBundle\GraphQL\Query\User\UserField;
+use AppBundle\GraphQL\Query\User\UsersField;
+use AppBundle\GraphQL\Query\UserToken\UserTokenField;
 use Youshido\GraphQL\Type\Object\AbstractObjectType;
 
 class QueryType extends AbstractObjectType
@@ -33,6 +36,13 @@ class QueryType extends AbstractObjectType
                 // activityEfforts
                 new ActivityEffortField(),
                 new ActivityEffortsField(),
+
+                // users
+                new UserField(),
+                new UsersField(),
+
+                // userTokens
+                new UserTokenField(),
             ]
         );
     }

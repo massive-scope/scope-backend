@@ -21,9 +21,9 @@ class ActivityType extends AbstractObjectType
                 'package' => new PackageField(false),
                 'activityEfforts' => new ActivityEffortsField(),
                 '__typename' => [
-                    'type' => new  StringType(),
+                    'type' => new StringType(),
                     'resolver' => function () {
-                        return 'Activity';
+                        return 'activity';
                     },
                 ],
             ]

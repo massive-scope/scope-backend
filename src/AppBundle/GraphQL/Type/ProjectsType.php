@@ -16,9 +16,9 @@ class ProjectsType extends AbstractObjectType
                 'total' => new IntType(),
                 'items' => new ListType(new ProjectType()),
                 '__typename' => [
-                    'type' => new  StringType(),
+                    'type' => new StringType(),
                     'resolver' => function () {
-                        return 'Projects';
+                        return 'projects';
                     },
                 ],
             ]

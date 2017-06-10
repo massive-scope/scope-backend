@@ -2,29 +2,28 @@
 
 namespace AppBundle\GraphQL\Type;
 
-use AppBundle\GraphQL\Query\Activity\ActivityField;
+use AppBundle\GraphQL\Query\User\UserField;
 use Youshido\GraphQL\Type\NonNullType;
 use Youshido\GraphQL\Type\Object\AbstractObjectType;
 use Youshido\GraphQL\Type\Scalar\DateTimeType;
-use Youshido\GraphQL\Type\Scalar\FloatType;
 use Youshido\GraphQL\Type\Scalar\IdType;
 use Youshido\GraphQL\Type\Scalar\StringType;
 
-class ActivityEffortType extends AbstractObjectType
+class UserTokenType extends AbstractObjectType
 {
     public function build($config)
     {
         $config->addFields(
             [
                 'id' => new NonNullType(new IdType()),
+                'name' => new StringType(),
+                'token' => new StringType(),
                 'date' => new DateTimeType(),
-                'hours' => new FloatType(),
-                'description' => new StringType(),
-                'activity' => new ActivityField(false),
+                'user' => new UserField(false),
                 '__typename' => [
-                    'type' => new  StringType(),
+                    'type' => new StringType(),
                     'resolver' => function () {
-                        return 'activityEffort';
+                        return 'userToken';
                     },
                 ],
             ]

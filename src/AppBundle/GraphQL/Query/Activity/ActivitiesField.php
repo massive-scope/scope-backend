@@ -13,8 +13,6 @@ use Youshido\GraphQLBundle\Field\AbstractContainerAwareField;
 
 class ActivitiesField extends AbstractContainerAwareField
 {
-    use ActivityQueryBuilderTrait;
-
     public function build(FieldConfig $config)
     {
         $this->addArgument('package', new IntType());

@@ -7,7 +7,6 @@ use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Youshido\GraphQL\Execution\ResolveInfo;
 use Youshido\GraphQL\Parser\Ast\Field;
-use Youshido\GraphQL\Parser\Ast\Query;
 
 /**
  * AbstractEntityRepository.

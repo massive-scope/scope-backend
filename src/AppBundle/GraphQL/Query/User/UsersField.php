@@ -1,9 +1,9 @@
 <?php
 
-namespace AppBundle\GraphQL\Query\ActivityEffort;
+namespace AppBundle\GraphQL\Query\User;
 
-use AppBundle\Entity\ActivityEffort;
-use AppBundle\GraphQL\Type\ActivityEffortsType;
+use AppBundle\Entity\User;
+use AppBundle\GraphQL\Type\UsersType;
 use Doctrine\ORM\EntityManagerInterface;
 use Youshido\GraphQL\Config\Field\FieldConfig;
 use Youshido\GraphQL\Execution\ResolveInfo;
@@ -11,12 +11,11 @@ use Youshido\GraphQL\Type\Scalar\IntType;
 use Youshido\GraphQL\Type\Scalar\StringType;
 use Youshido\GraphQLBundle\Field\AbstractContainerAwareField;
 
-class ActivityEffortsField extends AbstractContainerAwareField
+class UsersField extends AbstractContainerAwareField
 {
     public function build(FieldConfig $config)
     {
-        $this->addArgument('activity', new IntType());
-        $this->addArgument('description', new StringType());
+        $this->addArgument('login', new StringType());
         $this->addArgument('offset', new IntType());
         $this->addArgument('size', new IntType());
     }
@@ -25,7 +24,7 @@ class ActivityEffortsField extends AbstractContainerAwareField
     {
         /** @var EntityManagerInterface $entityManager */
         $entityManager = $this->get('doctrine.orm.entity_manager');
-        $repository = $entityManager->getRepository(ActivityEffort::class);
+        $repository = $entityManager->getRepository(User::class);
 
         return $repository->getList(
             $value,
@@ -36,7 +35,7 @@ class ActivityEffortsField extends AbstractContainerAwareField
 
     public function getType()
     {
-        return new ActivityEffortsType();
+        return new UsersType();
     }
 
     public function get($id)

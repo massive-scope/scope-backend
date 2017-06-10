@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity repository-class="AppBundle\Repository\UserTokenRepository"
+            name="AppBundle\Entity\UserToken"
+            table="userTokens">
+        <id name="id" type="bigint" column="id">
+            <generator strategy="AUTO"/>
+        </id>
+
+        <field name="name" type="string" column="name" length="255"/>
+        <field name="expirationDate" type="datetime" column="expirationDate"/>
+        <field name="token" type="text" column="token"/>
+
+        <many-to-one field="user" target-entity="AppBundle\Entity\User">
+            <join-columns>
+                <join-column name="idUsers" referenced-column-name="id" on-delete="CASCADE" nullable="false"/>
+            </join-columns>
+        </many-to-one>
+    </entity>
+</doctrine-mapping>
