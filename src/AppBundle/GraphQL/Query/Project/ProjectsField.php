@@ -27,9 +27,9 @@ class ProjectsField extends AbstractContainerAwareField
         $repository = $entityManager->getRepository(Project::class);
 
         return $repository->getList(
+            $value,
             $args,
-            $info,
-            $value
+            $info
         );
     }
 
