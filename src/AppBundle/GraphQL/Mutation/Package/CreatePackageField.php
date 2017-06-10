@@ -17,7 +17,6 @@ use Youshido\GraphQLBundle\Field\AbstractContainerAwareField;
 class CreatePackageField extends AbstractContainerAwareField
 {
     use PackageMapperTrait;
-    use PackageQueryBuilderTrait;
 
     public function build(FieldConfig $config)
     {
@@ -42,15 +41,9 @@ class CreatePackageField extends AbstractContainerAwareField
         $entityManager->persist($this->mapPackage($args, $package));
         $entityManager->flush();
 
-        /** @var EntityManagerInterface $entityManager */
-        $entityManager = $this->get('doctrine.orm.entity_manager');
         $repository = $entityManager->getRepository(Package::class);
-        $queryBuilder = $repository->createQueryBuilder('entity');
 
-        $queryBuilder->where('entity.id = :id')->setParameter('id', $package->getId());
-        $this->addPackageFields($info->getFieldASTList(), $queryBuilder);
-
-        return $queryBuilder->getQuery()->getSingleResult();
+        return $repository->get($value, ['id' => $package->getId()], $info);
     }
 
     public function getType()

@@ -16,7 +16,6 @@ use Youshido\GraphQLBundle\Field\AbstractContainerAwareField;
 class UpdateActivityField extends AbstractContainerAwareField
 {
     use ActivityMapperTrait;
-    use ActivityQueryBuilderTrait;
 
     public function build(FieldConfig $config)
     {
@@ -38,15 +37,8 @@ class UpdateActivityField extends AbstractContainerAwareField
         $this->mapActivity($args, $activity);
         $entityManager->flush();
 
-        /** @var EntityManagerInterface $entityManager */
-        $entityManager = $this->get('doctrine.orm.entity_manager');
         $repository = $entityManager->getRepository(Activity::class);
-        $queryBuilder = $repository->createQueryBuilder('entity');
-
-        $queryBuilder->where('entity.id = :id')->setParameter('id', $activity->getId());
-        $this->addActivityFields($info->getFieldASTList(), $queryBuilder);
-
-        return $queryBuilder->getQuery()->getSingleResult();
+        return $repository->get($value, $args, $info);
     }
 
     public function getType()

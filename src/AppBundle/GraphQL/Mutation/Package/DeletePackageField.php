@@ -14,8 +14,6 @@ use Youshido\GraphQLBundle\Field\AbstractContainerAwareField;
 
 class DeletePackageField extends AbstractContainerAwareField
 {
-    use PackageQueryBuilderTrait;
-
     public function build(FieldConfig $config)
     {
         $config->addArguments(
@@ -30,10 +28,7 @@ class DeletePackageField extends AbstractContainerAwareField
         /** @var EntityManagerInterface $entityManager */
         $entityManager = $this->get('doctrine.orm.entity_manager');
         $repository = $entityManager->getRepository(Package::class);
-
-        $queryBuilder = $repository->createQueryBuilder('entity');
-        $result = $queryBuilder->where('entity.id = ' . $args['id'])->getQuery()->getSingleResult();
-        $this->addPackageFields($info->getFieldASTList(), $queryBuilder);
+        $result = $repository->get($value, $args, $info);
 
         $entityManager->remove($entityManager->getReference(Package::class, $args['id']));
         $entityManager->flush();

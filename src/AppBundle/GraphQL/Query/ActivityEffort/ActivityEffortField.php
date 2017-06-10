@@ -13,8 +13,6 @@ use Youshido\GraphQLBundle\Field\AbstractContainerAwareField;
 
 class ActivityEffortField extends AbstractContainerAwareField
 {
-    use ActivityEffortQueryBuilderTrait;
-
     /**
      * @var bool
      */

@@ -28,9 +28,7 @@ class DeleteProjectField extends AbstractContainerAwareField
         /** @var EntityManagerInterface $entityManager */
         $entityManager = $this->get('doctrine.orm.entity_manager');
         $repository = $entityManager->getRepository(Project::class);
-
-        $queryBuilder = $repository->addFields($info->getFieldASTList(), $repository->createQueryBuilder('entity'));
-        $result = $queryBuilder->where('entity.id = ' . $args['id'])->getQuery()->getSingleResult();
+        $result = $repository->get($value, $args, $info);
 
         $entityManager->remove($entityManager->getReference(Project::class, $args['id']));
         $entityManager->flush();

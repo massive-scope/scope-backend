@@ -20,7 +20,6 @@ use Youshido\GraphQLBundle\Field\AbstractContainerAwareField;
 class CreateActivityEffortField extends AbstractContainerAwareField
 {
     use ActivityEffortMapperTrait;
-    use ActivityEffortQueryBuilderTrait;
 
     public function build(FieldConfig $config)
     {
@@ -40,20 +39,13 @@ class CreateActivityEffortField extends AbstractContainerAwareField
         $entityManager = $this->get('doctrine.orm.entity_manager');
 
         $activity = $entityManager->find(Activity::class, $args['activity']);
-
         $activityEffort = new ActivityEffort($activity);
         $entityManager->persist($this->mapActivityEffort($args, $activityEffort));
         $entityManager->flush();
 
-        /** @var EntityManagerInterface $entityManager */
-        $entityManager = $this->get('doctrine.orm.entity_manager');
         $repository = $entityManager->getRepository(ActivityEffort::class);
-        $queryBuilder = $repository->createQueryBuilder('entity');
 
-        $queryBuilder->where('entity.id = :id')->setParameter('id', $activityEffort->getId());
-        $this->addActivityEffortFields($info->getFieldASTList(), $queryBuilder);
-
-        return $queryBuilder->getQuery()->getSingleResult();
+        return $repository->get($value, ['id' => $activityEffort->getId()], $info);
     }
 
     public function getType()

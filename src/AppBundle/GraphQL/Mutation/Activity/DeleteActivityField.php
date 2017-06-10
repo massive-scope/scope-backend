@@ -14,8 +14,6 @@ use Youshido\GraphQLBundle\Field\AbstractContainerAwareField;
 
 class DeleteActivityField extends AbstractContainerAwareField
 {
-    use ActivityQueryBuilderTrait;
-
     public function build(FieldConfig $config)
     {
         $config->addArguments(
@@ -30,10 +28,7 @@ class DeleteActivityField extends AbstractContainerAwareField
         /** @var EntityManagerInterface $entityManager */
         $entityManager = $this->get('doctrine.orm.entity_manager');
         $repository = $entityManager->getRepository(Activity::class);
-
-        $queryBuilder = $repository->createQueryBuilder('entity');
-        $result = $queryBuilder->where('entity.id = ' . $args['id'])->getQuery()->getArrayResult()[0];
-        $this->addActivityFields($info->getFieldASTList(), $queryBuilder);
+        $result = $repository->get($value, $args, $info);
 
         $entityManager->remove($entityManager->getReference(Activity::class, $args['id']));
         $entityManager->flush();

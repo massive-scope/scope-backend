@@ -3,7 +3,6 @@
 namespace AppBundle\GraphQL\Mutation\Package;
 
 use AppBundle\Entity\Package;
-use AppBundle\GraphQL\Query\Package\PackageQueryBuilderTrait;
 use AppBundle\GraphQL\Type\PackageType;
 use Doctrine\ORM\EntityManagerInterface;
 use Youshido\GraphQL\Config\Field\FieldConfig;
@@ -16,7 +15,6 @@ use Youshido\GraphQLBundle\Field\AbstractContainerAwareField;
 class UpdatePackageField extends AbstractContainerAwareField
 {
     use PackageMapperTrait;
-    use PackageQueryBuilderTrait;
 
     public function build(FieldConfig $config)
     {
@@ -38,15 +36,9 @@ class UpdatePackageField extends AbstractContainerAwareField
         $this->mapPackage($args, $package);
         $entityManager->flush();
 
-        /** @var EntityManagerInterface $entityManager */
-        $entityManager = $this->get('doctrine.orm.entity_manager');
         $repository = $entityManager->getRepository(Package::class);
-        $queryBuilder = $repository->createQueryBuilder('entity');
 
-        $queryBuilder->where('entity.id = :id')->setParameter('id', $package->getId());
-        $this->addPackageFields($info->getFieldASTList(), $queryBuilder);
-
-        return $queryBuilder->getQuery()->getSingleResult();
+        return $repository->get($value, $args, $info);
     }
 
     public function getType()
