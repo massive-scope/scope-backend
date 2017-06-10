@@ -1,2 +1,8 @@
 graphql:
     resource: "@GraphQLBundle/Controller/"
+
+home:
+    path: /
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template:    default/index.html.twig

@@ -16,6 +16,8 @@
 /vendor/
 /web/bundles/
 
+src/AppBundle/Resources/public/scope-ui
+
 # Frontend caches
 .sass-cache/
 node_modules/
